@@ -46,7 +46,7 @@ function validateSession(){
 ?><!DOCTYPE html>
 <html lang="es">
 <head>
-	<title>Anime Móvil test</title>
+	<title>Anime Móvil test2</title>
         <link rel="shortcut icon" href="/assets/webApp/favicon.png" type="image/png"/>
         <meta content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1" name="viewport"/>
         <meta charset="utf-8"/>
