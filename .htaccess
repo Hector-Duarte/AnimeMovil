@@ -14,7 +14,6 @@ RewriteRule ^$ pagues/index.php
 RewriteRule ^episodio/([0-9]{0,4})-([^/.]+)$ pagues/episodio.php?id=$1&slug=$2
 
 
-
 #AnimeIndex
 RewriteRule ^anime/([0-9]{0,4})-([^/.]+)$ pagues/animeIndex.php?id=$1&slug=$2
 
