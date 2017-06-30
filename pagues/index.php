@@ -24,7 +24,7 @@ function validateSession(){
    $_arraysign[] = SIGNATURE_HASH_USER; //key hash
 
    $_str2sign = implode("\n", $_arraysign);
- 
+
    $session_hash = base64_encode( hash_hmac('sha256', urldecode(utf8_encode($_str2sign)), base64_decode($key), true) ); //hast token para verificar sesion
 
 
@@ -46,7 +46,7 @@ function validateSession(){
 ?><!DOCTYPE html>
 <html lang="es">
 <head>
-	<title>Anime Móvil</title>
+	<title>Anime Móvil test</title>
         <link rel="shortcut icon" href="/assets/webApp/favicon.png" type="image/png"/>
         <meta content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1" name="viewport"/>
         <meta charset="utf-8"/>
@@ -96,7 +96,7 @@ function validateSession(){
 
 
 <header>
- <nav class="contentHeader">  
+ <nav class="contentHeader">
    <div class="cabecera">
 
 <div class="logo"><a href="/" title="Pagina principal"><img src="/assets/webApp/logo.png"/></a></div>
@@ -131,7 +131,7 @@ function validateSession(){
     <input type="text" name="q" placeholder="Ingresa un termino..." required/>
     <button form="formNav" type="submit"><i class="fa fa-search" aria-hidden="true"></i></button>
 
- 
+
 
              <div class="buscadorResultados">
                <ul>
@@ -150,7 +150,7 @@ function validateSession(){
 
 
 <div class="usuarioNavegacion" id="usuarioNavegacion">
-   <button><i class="fa fa-user-o" aria-hidden="true"></i></button>  
+   <button><i class="fa fa-user-o" aria-hidden="true"></i></button>
          <div class="menuUsuarioNavegacion">
               <ul>
                 <?php
@@ -190,7 +190,7 @@ function validateSession(){
 <div class="cuerpoHomeLeft">
 
 <!-- INFO -->
-<?php 
+<?php
 
 //imprimir mensaje del admin
 $json = file_get_contents("/var/www/html/static/mensaje.json");
@@ -333,7 +333,7 @@ echo '<li><a href="/episodio/' . $id .'-' . $slug .'" title="' . $title .'"> <im
 <footer><span>Anime Movil 2014 - <script>document.write(new Date().getFullYear())</script></span></footer>
 
 
-      
+
       <script>
       //Funciones necesarias
       function functions_requerid(){
