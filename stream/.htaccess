@@ -1,0 +1,14 @@
+
+<IfModule mod_rewrite.c>
+
+RewriteEngine On
+
+#API
+RewriteRule ^([0-9]+)/([a-zA-Z0-9]+)$ api.php?id=$1&node=$2 [QSA]
+#API
+
+
+</IfModule>
+
+
+

@@ -1,0 +1,775 @@
+/*RESET.CSS*/
+html, body, div, span, applet, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, abbr, acronym, address, big, cite, code,
+del, dfn, em, img, ins, kbd, q, s, samp,
+small, strike, strong, sub, sup, tt, var,
+b, u, i, center,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td,
+article, aside, canvas, details, embed, 
+figure, figcaption, footer, header, hgroup, 
+menu, nav, output, ruby, section, summary,
+time, mark, audio, video {
+	margin: 0;
+	padding: 0;
+	border: 0;
+	font-size: 100%;
+	font: inherit;
+	vertical-align: baseline;
+}
+/* HTML5 display-role reset for older browsers */
+article, aside, details, figcaption, figure, 
+footer, header, hgroup, menu, nav, section {
+	display: block;
+}
+body {
+	line-height: 1;
+}
+ol, ul {
+	list-style: none;
+}
+blockquote, q {
+	quotes: none;
+}
+blockquote:before, blockquote:after,
+q:before, q:after {
+	content: '';
+	content: none;
+}
+table {
+	border-collapse: collapse;
+	border-spacing: 0;
+}
+/* FIN RESET.CSS*/
+
+/*FONTS*/
+@import url('https://fonts.googleapis.com/css?family=Roboto');
+
+/*CUERPO BASE*/
+
+
+body{
+     font-family: 'Roboto', sans-serif;
+    background: #f1f4f5;
+animation: mymove 1.5s;
+}
+
+a{
+text-decoration:none;
+color:#000;
+}
+
+
+@keyframes mymove {
+    from {top: -20px;opacity: .2;}
+    to {top: 0px;opacity: 1;}
+}
+
+
+/*Formulario de sesion*/
+
+.usuarioForm{
+width:500px;
+max-width:90%;
+margin:50px auto;
+border-radius:2px;
+text-align:center;
+padding:20px 10px;
+background:#FFF;
+border-bottom:2px solid #04AEF7;
+}
+.usuarioForm .logoLogin{
+margin:10px 0 15px 0;
+}
+.usuarioForm .logoLogin img{
+height:20px;
+}
+
+.usuarioForm form input{
+width:400px;
+max-width:95%;
+margin:10px 0;
+height:20px;
+outline:0;
+font-size:18px;
+border:0;
+background:#F5F5F5;
+padding:5px 5px;
+border-radius:2px;
+}
+.usuarioForm form input[type*="submit"]{
+margin-top:30px;
+height:35px;
+background:#04AEF7;
+color:#FFF;
+font-size:16px;
+transition:1s;
+}
+.usuarioForm form input[type*="submit"]:hover{
+background:#0695d2;
+}
+
+.errorLogin{
+background:#f55656;
+width:400px;
+max-width:90%;
+line-height:40px;
+margin:20px auto 0 auto;
+border-radius:2px;
+color:#FFF;
+font-size:15px;
+text-align:center;
+}
+
+.registrarUsuario{
+margin-top:10px;
+}
+.registrarUsuario a{
+text-decoration:none;
+font-size:14px;
+color:#04AEF7;
+font-weight:600;
+}
+
+/*FIN Formulario de sesion*/
+
+
+/*HEADER*/
+
+.cabecera{
+height:50px;
+width:100%;
+background:#FFF;
+line-height:50px;
+display:flex;
+box-shadow:0 0 8px rgba(0,0,0,.2);
+}
+
+.logo{
+height:50px;
+display:inline-block;
+}
+.logo a{
+display:block;
+height:50px;
+padding:0 20px;
+line-height:60px;
+}
+.logo a img{
+height:16px;
+}
+
+@media screen and (max-width:900px){
+.logo a img{
+height:14px;
+}
+
+}
+
+.buscador{
+display:inline-block;
+height:50px;
+z-index:2;
+}
+.buscador form{
+display:flex;
+}
+.buscador form input[type*="text"]{
+height:48px;
+width:250px;
+outline:0;
+border:0;
+font-size:19px;
+background:#F5F5F5;
+padding-left:5px;
+}
+
+.buscador form button[type*="submit"]{
+height:50px;
+width:35px;
+border:0;
+outline:0;
+padding:0 10px;
+cursor:pointer;
+}
+
+@media screen and (max-width:900px){
+
+.buscador{
+   height:50px;
+   width:50px;
+   text-align:center;
+   cursor:pointer;
+   transition:.5s;
+}
+
+.buscador:before{
+   font-family: FontAwesome;
+   content: "\f002";
+}
+
+.buscador form{
+display:none;
+}
+.buscador:hover{
+background:#04AEF7;
+color:#FFF;
+}
+
+.buscador:hover form{
+display:block;
+}
+
+@keyframes buscador{
+from {opacity:0;}
+to {opacity:1;}
+}
+
+.buscador form input[type*="text"]{
+width:80%;
+position:absolute;
+top:50px;
+left:0;
+animation: buscador .5s;
+}
+.buscador form button[type*="submit"]{
+width:20%;
+height:52px;
+position:absolute;
+top:50px;
+right:0;
+animation: buscador .5s;
+}
+
+
+
+
+
+
+/*fin responsive*/
+}
+
+
+
+.headerSociales{
+text-align:center;
+display:flex;
+z-index:2;
+}
+.headerSociales a{
+width:50px;
+height:50px;
+display:inline-block;
+transition:.5s;
+}
+
+.headerSociales .googleplus:hover{
+background:#f12121;
+color:#FFF;
+}
+
+.headerSociales .facebook:hover{
+background:#1486da;
+color:#FFF;
+}
+
+.headerSociales .twitter:hover{
+background:#42abea;
+color:#FFF;
+}
+
+@media screen and (max-width:900px){
+
+
+.headerSociales:before{
+   font-family: FontAwesome;
+   content: "\f1e0";
+}
+
+.headerSociales{
+cursor:pointer;
+width:50px;
+
+display:block;
+}
+
+.headerSociales:hover{
+background:#04AEF7;
+color:#FFF;
+}
+.headerSociales:hover a{
+display:block;
+}
+
+.headerSociales a{
+background:#FFF;
+display:none;
+
+}
+
+
+
+
+}
+
+
+
+
+.opcionesUsuario{
+display:inline-block;
+width:50px;
+height:50px;
+text-align:center;
+position:absolute;
+right:0;
+top:0;
+cursor:pointer;
+transition:.5s;
+}
+
+@keyframes menuUsuario{
+from {opacity:0;}
+to {opacity:1;}
+}
+
+
+.menuUsuario{
+background:#FFF;
+position:relative;
+width:200px;
+left:-150px;
+display:none;
+text-align:left;
+border-radius:2px;
+border-bottom:2px solid #04AEF7;
+z-index:2;
+}
+.menuUsuario a{
+display:block;
+padding-left:5px;
+transition:.5s;
+}
+.menuUsuario a:hover{
+padding-left:7px;
+background:#04AEF7;
+color:#FFF;
+}
+
+
+.opcionesUsuario:hover{
+background:#04AEF7;
+color:#FFF;
+}
+
+
+.opcionesUsuario:hover .menuUsuario{
+display:block;
+animation: menuUsuario .5s;
+}
+
+
+
+
+.menuLinks{
+height:50px;
+text-align:center;
+display:flex;
+z-index:2;
+}
+.menuLinks ul li{
+display:inline-block;
+}
+.menuLinks ul li a{
+display:block;
+height:50px;
+line-height:50px;
+padding:0 10px;
+transition:.5s;
+}
+
+
+.menuLinks ul li a:hover{
+background:#04AEF7;
+color:#FFF;
+}
+
+
+@media screen and (max-width:900px){
+
+
+.menuLinks:before{
+   font-family: FontAwesome;
+   content: "\f039";
+}
+
+.menuLinks{
+cursor:pointer;
+width:50px;
+display:block;
+}
+
+.menuLinks:hover{
+background:#04AEF7;
+color:#FFF;
+}
+
+.menuLinks ul{
+text-align:left;
+background:#FFF;
+position:absolute;
+left:0;
+top:50px;
+width:100%;
+display:none;
+}
+
+
+.menuLinks:hover ul{
+display:block;
+}
+
+
+.menuLinks ul li{
+display:inline-block;
+width:100%;
+animation: buscador .5s;
+}
+.menuLinks ul li a{
+padding-left:25px;
+}
+
+
+
+}
+
+
+/*FIN HEADER*/
+
+
+
+/*Panel pagina*/
+
+.panel{
+width:95%;
+margin:10px auto;
+}
+
+
+.panel .usuarioText{
+background:#04AEF7;
+color:#FFF;
+width:90%;
+margin:10px auto;
+border-radius:2px;
+padding:10px;
+}
+
+
+
+
+.panelElementos{
+width:90%;
+margin:10px auto;
+text-align:center;
+}
+
+
+
+.panelElementos ul li{
+display:inline-block;
+margin:10px;
+}
+
+.panelElementos ul li a{
+padding:10px 30px;
+border-radius:2px;
+display:block;
+color:#FFF;
+background:#04AEF7;
+}
+
+.returnPanelHome{
+width:900px;
+max-width:90%;
+margin:20px auto;
+}
+
+.returnPanelHome a{
+background:#FFF;
+color:#000;
+padding:5px 20px;
+font-size:15px;
+border-radius:2px;
+border-left:3px solid #000;
+}
+
+
+.tablaOpciones{
+
+}
+
+.tablaOpciones ul{
+text-align:center;
+}
+
+.tablaOpciones ul li{
+display:inline-block;
+height:30px;
+line-height:30px;
+width:24%;
+white-space: nowrap;
+overflow: hidden;
+text-overflow: ellipsis;
+}
+
+.tablaOpciones ul li span{
+font-size:15px;
+font-weight:600;
+color:#04AEF7;
+}
+
+.tablaOpciones ul li span.x-botonEditar{
+background:#04AEF7;
+border-radius:2px;
+}
+
+.tablaOpciones ul li span.x-botonEditar a{
+color:#FFF;
+padding:0 15px;
+display:inline-block;
+}
+
+.tablaOpciones ul li span.x-botonEliminar{
+background:red;
+border-radius:2px;
+}
+
+.tablaOpciones ul li span.x-botonEliminar a{
+color:#FFF;
+padding:0 15px;
+display:inline-block;
+}
+/*FIN Panel pagina*/
+
+
+/* FORMULARIO */
+
+.formulario{
+padding:10px 40px;
+margin:10px auto;
+font-weight:600;
+font-size:12px;
+}
+
+
+.formulario input[type="submit"]{
+width:200px;
+max-width:70%;
+margin:0 auto;
+height:30px;
+background:#04AEF7;
+color:#FFF;
+float:left;
+outline:0;
+border:0;
+font-weight:600;
+border-radius:1px;
+transition:1s;
+}
+
+.clear{
+clear:both;
+}
+
+.formulario input[type="submit"]:hover{
+opacity:.7;
+}
+
+.formulario input[type="text"], .formulario input[type="number"]{
+border:0;
+outline:0;
+padding:8px;
+margin:0 auto;
+width:750px;
+max-width:95%;
+margin:0 auto;
+}
+
+.formulario select{
+height:30px;
+outline:0;
+border:0;
+margin-top:5px;
+padding:0 20px;
+}
+
+
+.formulario select option{
+font-size:16px;
+outline:0;
+border:0;
+}
+
+.formulario .x-content{
+width:750px;
+max-width:100%;
+margin:0 auto;
+}
+
+.formulario textarea{
+width:750px;
+max-width:95%;
+margin:0 auto;
+height:15em;
+border:0;
+border-radius:2px;
+outline:0;
+}
+
+.formulario input[name*="generos[]"]{
+margin-top:20px;
+}
+
+
+/* FIN FORMULARIO */
+
+
+
+
+
+
+
+/*TABLAS*/
+
+table{
+background:#FFF;
+margin:10px auto;
+width:900px;
+border-radius:2px;
+    border-collapse: collapse;
+    border-spacing: 0;
+}
+
+table tr{
+text-align:left;
+font-size:15px;
+transition:.5s;
+height:30px;
+line-height:30px;
+overflow:hidden;
+}
+
+
+
+table tr:hover{
+background:#F5F5F5;
+}
+
+
+
+table tr td a{
+display:block;
+text-align:center;
+font-weight:600;
+font-size:14px;
+height:30px;
+color:#04AEF7;
+}
+
+table tr.hover{
+background:#04AEF7;
+color:#FFF;
+height:30px;
+line-height:30px;
+text-align:center;
+font-weight:600;
+font-size:14px;
+}
+
+@media screen and (max-width:1000px){
+
+table{
+margin:0;
+width:100%;
+}
+
+}
+
+
+
+/*FIN TABLAS*/
+
+
+/* OFFSET botones*/
+
+.offset{
+text-align:center;
+}
+
+.offset div{
+background:#a6a8a9;
+display:inline-block;
+height:40px;
+width:80px;
+margin:5px;
+font-size:15px;
+border-radius:2px;
+
+}
+
+.offset div a{
+color:#FFF;
+height:40px;
+line-height:40px;
+display:block;
+}
+/*FIN OFFSET botones*/
+
+
+/*BUSCADOR*/
+
+.buscadorPanel{
+    margin: 10px auto;
+    width: 900px;
+    max-width: 100%;
+}
+
+.buscadorPanel input[type="text"]{
+padding:3px;
+height:25px;
+outline:0;
+border:0;
+border-radius:2px;
+}
+
+.buscadorPanel select{
+height:30px;
+outline:0;
+border:0;
+border-radius:2px;
+}
+
+.buscadorPanel input[type="submit"]{
+padding:5px 10px;
+color:#FFF;
+background:#04AEF7;
+height:30px;
+outline:0;
+border:0;
+border-radius:2px;
+}
+
+/* BOTON DE BORRADOR */
+
+.BorrarBoton{
+margin:20px 5px;
+}
+.BorrarBoton a{
+display:inline-block;
+padding:10px 25px;
+color:#FFF;
+background:red;
+border-radius:2px;
+}

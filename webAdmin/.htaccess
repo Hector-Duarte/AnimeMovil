@@ -1,0 +1,19 @@
+<IfModule mod_rewrite.c>
+
+RewriteEngine On
+
+#ADMIN
+
+
+#admin index
+RewriteRule ^$ pagues/start.php?include=panel
+
+#admin navegacion
+RewriteRule ^([^/.]+)$ pagues/start.php?include=$1
+
+
+
+
+#ADMIN
+
+</IfModule>

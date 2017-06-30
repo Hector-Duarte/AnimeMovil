@@ -1,0 +1,1623 @@
+/*RESET.CSS*/
+html, body, div, span, applet, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, abbr, acronym, address, big, cite, code,
+del, dfn, em, img, ins, kbd, q, s, samp,
+small, strike, strong, sub, sup, tt, var,
+b, u, i, center,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td,
+article, aside, canvas, details, embed, 
+figure, figcaption, footer, header, hgroup, 
+menu, nav, output, ruby, section, summary,
+time, mark, audio, video {
+	margin: 0;
+	padding: 0;
+	border: 0;
+	font-size: 100%;
+	font: inherit;
+	vertical-align: baseline;
+}
+/* HTML5 display-role reset for older browsers */
+article, aside, details, figcaption, figure, 
+footer, header, hgroup, menu, nav, section {
+	display: block;
+}
+body {
+	line-height: 1;
+}
+ol, ul {
+	list-style: none;
+}
+blockquote, q {
+	quotes: none;
+}
+blockquote:before, blockquote:after,
+q:before, q:after {
+	content: '';
+	content: none;
+}
+table {
+	border-collapse: collapse;
+	border-spacing: 0;
+}
+/* FIN RESET.CSS*/
+
+
+
+/*FONTS*/
+@import url('//fonts.googleapis.com/css?family=Roboto');
+
+
+/*KEY FRAMES*/
+@keyframes down{
+from {top:-10px;opacity:.6;}
+to {top:0;opacity:1;}
+}
+/*KEY FRAMES*/
+
+
+/*TAGS*/
+body{
+     animation:down 1s;
+     background:#f1f4f5;
+     font-family: 'Roboto', sans-serif;
+     position:relative;
+}
+a{
+text-decoration:none;
+color:#000;
+}
+
+.clear{
+clear:both;
+}
+
+.disabled{
+pointer-events: none;
+opacity:.6;
+}
+
+/*FIN TAGS*/
+
+/*ADS*/
+
+.ads1{
+  background: #FFF;
+  border-radius: 3px;
+  padding: 10px;
+  display: inline-block;
+  width: 15%;
+  box-shadow:0 0 1px rgba(0,0,0,.2);
+}
+@media screen and (max-width: 770px){
+  .ads1{
+    display: block;
+    width: 95%;
+    margin: 10px auto;
+  }
+}
+
+.ads2{
+  background: #FFF;
+  border-radius: 3px;
+  padding: 10px;
+  display: block;
+  width: 90%;
+  margin:10px auto;
+  box-shadow:0 0 1px rgba(0,0,0,.2);
+}
+
+
+
+/*HEADER*/
+
+header{
+margin-bottom: 20px;
+height:52px;
+}
+
+.contentHeader{
+
+background:#FFF;
+height: 25px;
+box-shadow:0 0 8px rgba(0,0,0,.2);
+position:absolute;
+width:100%;
+z-index:2;
+padding:15px 0 10px 0;
+}
+
+.cabecera{
+width:1150px;
+max-width:90%;
+margin:0 auto;
+}
+
+.cabecera .navegacion{
+display:inline-block;
+padding:0 3px;
+}
+
+.cabecera .navegacion .contenidoNavegacion{
+display:inline-block;
+padding:0 3px;
+}
+
+
+.cabecera .navegacion #navegacionOptionsButton{
+background:transparent;
+border:0;
+outline:0;
+font-size:17px;
+padding:0 4px;
+cursor:pointer;
+display: none;
+}
+
+.cabecera .navegacion #navegacionOptionsButton:after{
+font-family: FontAwesome;
+content: "\f0c9";
+}
+
+
+.cabecera .navegacion .contenidoNavegacion a{
+font-size:14px;
+font-weight:600;
+color:#808080;
+margin:0 4px;
+}
+
+
+@media screen and (max-width: 660px){
+
+
+/* centrar todo el contenido de .cabecera para que se bea bonito */
+    .cabecera{
+      text-align: center;
+    }
+
+/*MOVER NAVEGACION A LA IZQUIERDA */
+    .cabecera .navegacion{
+      float: left;
+    }
+
+
+    .cabecera .navegacion #navegacionOptionsButton{
+    display: inline-block;
+    padding: 0px 6px;
+    font-size: 20px;
+   }
+
+    .cabecera .navegacion .contenidoNavegacion{
+      display: none;
+    }
+
+
+
+    .cabecera .navegacion.x-active #navegacionOptionsButton{
+    color:#04AEF7;
+   }
+
+           
+                   @keyframes OptionsBar{
+                   from {top:30px;opacity:0;}
+                   to {top:50px;opacity:1;}
+                   }
+
+
+
+    .cabecera .navegacion.x-active .contenidoNavegacion{
+    display: block;
+    position: absolute;
+    top:50px;
+    left:0;
+    width: 100%;
+    text-align: center;
+    background: #FFF;
+    border-radius: 3px;
+    padding:10px 0;
+    animation:.7s OptionsBar;
+   }
+
+
+}
+
+
+
+
+
+
+
+.cabecera .leftNavegacion{
+float:right;
+display:inline-block;
+}
+
+.cabecera .buscadorNavegacion{
+  display: inline-block;
+}
+
+.cabecera .leftNavegacion .buscadorNavegacion #buscadorBotonView{
+background:transparent;
+border:0;
+outline:0;
+font-size:17px;
+padding:0 4px;
+cursor:pointer;
+display: none;
+}
+
+.cabecera .leftNavegacion .buscadorNavegacion #buscadorBotonView:after{
+font-family: FontAwesome;
+content: "\f002";
+}
+
+.cabecera .leftNavegacion .buscadorNavegacion form{
+display:inline-block;
+padding:0 5px;
+}
+
+
+.cabecera .leftNavegacion .buscadorNavegacion form .buscadorResultados{
+  background: #FFF;
+  margin-top: 5px;
+}
+
+
+                   @keyframes resultadosAnimacionBar{
+                   from {opacity: 0;}
+                   to {opacity: 1;}
+                   }
+
+
+.cabecera .leftNavegacion .buscadorNavegacion form .buscadorResultados ul li{
+  width: 220px;
+  animation:1s resultadosAnimacionBar;
+}
+
+
+@media screen and (max-width: 660px){
+
+         .cabecera .leftNavegacion .buscadorNavegacion form .buscadorResultados ul li{
+           width: auto;
+           margin-top: 3px;
+           padding:0 5%;
+         }
+
+}
+
+.cabecera .leftNavegacion .buscadorNavegacion form .buscadorResultados ul li a{
+  display: block;
+  height: 60px;
+  line-height: 60px;
+  font-size: 13px;
+  font-weight:600;
+  color:#808080;
+  padding: 0 5px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  text-align: left;
+  transition:.5s;
+}
+
+.cabecera .leftNavegacion .buscadorNavegacion form .buscadorResultados ul li a:hover{
+  color: #04AEF7;
+}
+
+.cabecera .leftNavegacion .buscadorNavegacion form .buscadorResultados ul li a img{
+  height: 50px;
+  width: 50px;
+  display: inline;
+  border-radius: 3px;
+  margin-top: 5px 5px 0 0;
+  vertical-align: top;
+}
+
+.cabecera .leftNavegacion .buscadorNavegacion form input{
+outline:0;
+background: #F9F9F9;
+padding:5px;
+border:0;
+font-size:13px;
+border-radius:3px;
+width:170px;
+}
+
+.cabecera .leftNavegacion .buscadorNavegacion form button{
+background:#04AEF7;
+border:0;
+color: #FFF;
+outline:0;
+font-size:14px;
+padding:5px 10px;
+border-radius: 2px;
+cursor:pointer;
+}
+
+
+@media screen and (max-width: 660px){
+
+   .cabecera .leftNavegacion .buscadorNavegacion form{
+    display: none;
+   }
+   
+   .cabecera .leftNavegacion .buscadorNavegacion #buscadorBotonView{
+    display: inline-block;
+    padding: 0px 6px;
+   }
+
+   .cabecera .leftNavegacion .buscadorNavegacion.x-active #buscadorBotonView{
+    color:#04AEF7;
+   }
+
+           
+                   @keyframes BuscadorBar{
+                   from {top:30px;opacity:0;}
+                   to {top:48px;opacity:1;}
+                   }
+
+
+
+
+   .cabecera .leftNavegacion .buscadorNavegacion.x-active form{
+    display: block;
+    position: absolute;
+    top:48px;
+    left:0;
+    width: 100%;
+    text-align: center;
+    background: #FFF;
+    border-radius: 3px;
+    padding:10px 0;
+    animation:.7s BuscadorBar;
+   }
+
+      .cabecera .leftNavegacion .buscadorNavegacion.x-active form input[type="text"]{
+     width:80%;
+     height: 40px;
+     border:0;
+     background: #F9F9F9;
+     padding:0 5px;
+    }
+
+      .cabecera .leftNavegacion .buscadorNavegacion.x-active form button[type="submit"]{
+     border:0;
+     background: #04AEF7;
+     height: 40px;
+     width: 10%;
+     color: #FFF;
+     border-radius: 2px;
+    }
+
+}
+
+
+
+.cabecera .leftNavegacion #usuarioNavegacion{
+ float: right;
+}
+
+
+
+
+
+.cabecera .leftNavegacion #usuarioNavegacion button{
+background:transparent;
+border:0;
+outline:0;
+font-size:19px;
+padding:0 6px;
+cursor:pointer;
+}
+
+.cabecera .logo{
+display:inline-block;
+}
+
+.cabecera .logo img{
+width:150px;
+}
+
+.usuarioNavegacion{
+  display: inline-block;
+}
+
+.menuUsuarioNavegacion{
+  background: #FFF;
+  border-radius: 3px;
+  position:fixed;
+  top:60px;
+  right: 5%;
+  border-bottom: 2px solid #808080;
+  display: none;
+}
+
+@keyframes menuUsuario{
+from {top:30px;opacity:0;}
+to {top:60px;opacity:1;}
+}
+
+#usuarioNavegacion.x-active .menuUsuarioNavegacion{
+  display: block;
+  animation:.6s menuUsuario;
+}
+
+#usuarioNavegacion.x-active button{
+  color: #04AEF7;
+}
+
+.menuUsuarioNavegacion ul li a{
+  display: block;
+  padding:10px 25px;
+  font-size: 14px;
+  font-weight: 600;
+  color: #808080;
+  transition:.5s;
+}
+
+.menuUsuarioNavegacion ul li a:hover{
+  color: #04AEF7;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/*FIN HEADER*/
+
+
+/*Cuerpo*/
+
+.cuerpoBase{
+width:1200px;
+margin:0 auto;
+max-width:100%;
+}
+
+
+.cuerpoHomeLeft{
+width:95%;
+margin:0 auto;
+}
+
+
+
+@keyframes opacidad{
+from {opacity:0;}
+to {opacity:1;}
+}
+
+.info{
+background:#04AEF7;
+border-radius:3px;
+overflow:hidden;
+width:90%;
+margin:10px auto;
+padding:10px;
+animation:opacidad 2s;
+}
+.info span{
+color:#FFF;
+font-size:15px;
+}
+
+.infoText{
+width:98%;
+margin:5px auto;
+height:30px;
+line-height:30px;
+border-bottom:1px solid #E9ECEC;
+}
+
+.infoText span{
+color:#04AEF7;
+font-size:18px;
+}
+
+/*FIN de Cuerpo*/
+
+
+
+/*EPISODIOS INDEXS*/
+
+@keyframes hovers{
+from {opacity:0;}
+to{opacity:1;}
+}
+
+.episodiosIndex .hover{
+text-align:center;
+animation:hovers 5s;
+}
+
+.episodiosIndex.homeIndex{
+  width: 80%;
+  display: inline-block;
+  float: left;
+}
+
+@media screen and (max-width: 770px){
+  .episodiosIndex.homeIndex{
+    display: block;
+    width: 100%;
+    float: none;
+  }
+}
+
+.episodiosIndex .hover li{
+display:inline-block;
+overflow: hidden;
+width:210px;
+position:relative;
+animation:down 1s;
+border:1px solid #E9ECEC;
+border-radius:2px;
+transition:.7s;
+margin:5px;
+background:#FFF;
+}
+
+.episodiosIndex .hover li a{
+border-bottom:2px solid #F5F5F5;
+display:block;
+}
+
+
+
+.episodiosIndex .hover li:hover{
+box-shadow:0 0 15px rgba(0,0,0,.3);
+border:1px solid #04AEF7;
+}
+
+.episodiosIndex .hover li a img{
+height:110px;
+width:210px;
+transition:.3s;
+}
+
+
+
+.episodiosIndex .hover li a span{
+display:block;
+height:20px;
+line-height:20px;
+text-align:left;
+margin:0 auto;
+font-size:12px;
+width:95%;
+white-space: nowrap;
+overflow: hidden;
+text-overflow: ellipsis;
+color:#7A8392;
+font-weight:600;
+}
+
+
+
+
+@media screen and (max-width:900px){
+
+.episodiosIndex .hover li{
+width:180px;
+}
+.episodiosIndex .hover li a img{
+height:80px;
+width:180px;
+}
+
+}
+
+@media screen and (max-width:450px){
+
+.episodiosIndex .hover li{
+width:130px;
+}
+.episodiosIndex .hover li a img{
+height:60px;
+width:130px;
+}
+.episodiosIndex .hover li a span{
+font-size:12px;
+}
+
+
+
+}
+
+
+/* LISTAS */
+
+.episodiosIndex .list li a img{
+height: 50px;
+width: 80px;
+margin: 10px 5px;
+float: left;
+border-radius: 3px;
+}
+
+.episodiosIndex .list li{
+height:70px;
+width:100%;
+}
+.episodiosIndex .list li a{
+display:block;
+height:70px;
+line-height:70px;
+border-left:4px solid #BFBCBC;
+padding:0 8px;
+transition:.4s;
+background:#FFF;
+font-size: 13px;
+font-weight: 600;
+color: #a0a0a0;
+white-space: nowrap;
+overflow: hidden;
+text-overflow: ellipsis;
+}
+
+
+
+.episodiosIndex .list li a:visited{
+border-left:4px solid #04AEF7;
+}
+
+
+.episodiosIndex .list li a:hover{
+background:#04AEF7;
+color:#FFF;
+padding-left:12px;
+}
+
+
+
+
+
+
+
+/*FIN EPISODIOS INDEXS*/
+
+
+/* CSS ANIME */
+
+.AnimeCuerpo{
+width:1000px;
+max-width:100%;
+margin:0 auto;
+}
+
+.animeInfo{
+display:flex;
+-webkit-justify-content:space-around;
+justify-content:space-around;
+margin-bottom:10px;
+}
+
+
+.animePortada{
+text-align:center;
+display:inline-block;
+margin:5px;
+}
+
+.animePortada img{
+height:220px;
+width:160px;
+box-shadow:0 0 5px rgba(0,0,0,.4);
+}
+
+.animePortada .x-emisionEstado{
+padding:7px 0;
+max-width:95%;
+font-size:15px;
+font-weight:600;
+color:#FFF;
+border-radius:1px;
+margin:5px auto;
+}
+
+.animePortada .x-emisionEstado.x-true{
+background:#04AEF7;
+}
+
+.animePortada .x-emisionEstado.x-false{
+background:red;
+}
+
+.animePortada .x-emisionEstado.x-false:before{
+font-family:FontAwesome;
+content: "\f00c";
+padding:0 2px;
+}
+
+.animePortada .x-emisionEstado.x-true:before{
+font-family:FontAwesome;
+content: "\f164";
+padding:0 2px;
+}
+
+
+
+
+.animePortada .x-favorito{
+padding:7px 0;
+max-width:95%;
+font-size:15px;
+font-weight:600;
+color:#FFF;
+border-radius:1px;
+margin:5px auto;
+cursor: pointer;
+}
+.animePortada .x-favorito.x-true{
+background:#04AEF7;
+}
+
+.animePortada .x-favorito.x-false{
+background:red;
+}
+
+.animePortada .x-favorito.x-true:before{
+font-family:FontAwesome;
+content: "\f005";
+padding:0 2px;
+}
+
+.animePortada .x-favorito.x-false:before{
+font-family:FontAwesome;
+content: "\f00d";
+padding:0 2px;
+}
+
+
+.animeData{
+display:inline-block;
+width:calc(100% - 250px);
+background:#FFF;
+border-radius:2px;
+}
+
+.animeData .x-text{
+height:35px;
+background:#04AEF7;
+border-radius:2px;
+}
+
+.animeData .x-text span{
+line-height:35px;
+color:#FFF;
+text-align:center;
+padding:0 10px;
+font-weight:600;
+font-size:15px;
+height:35px;
+display:inline-block;
+}
+
+.animeData .x-title{
+text-align:center;
+font-weight:600;
+margin:15px;
+font-size:19px;
+}
+
+.animeData .x-generos{
+margin:7px;
+}
+
+.animeData .x-generos a{
+background:#04AEF7;
+color:#FFF;
+padding:3px;
+margin:2px;
+font-weight:600;
+display:inline-block;
+border-radius:3px;
+font-size:15px;
+}
+
+.animeData .x-generos a:before{
+font-family:FontAwesome;
+content: "\f02b";
+padding:0 2px;
+font-size:12px;
+}
+
+
+.animeData .x-emision{
+margin:7px;
+font-weight:600;
+font-size:15px;
+}
+
+.animeData .x-emision:before{
+font-family:FontAwesome;
+content:"\f274";
+margin:7px;
+}
+
+.animeData .x-sinopsis{
+margin:7px;
+font-size:13px;
+padding:0 3px;
+color:#808080;
+}
+
+.animeData .x-sinopsis::-webkit-scrollbar {
+    width: 3px;
+}
+
+
+.animeData .x-sinopsis::-webkit-scrollbar-track {
+    -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
+}
+
+
+.animeData .x-sinopsis::-webkit-scrollbar-thumb {
+  background-color: #04AEF7;
+  border-radius:3px;
+  
+}
+
+
+/*HOVER ANIME CAPS*/
+
+@media screen and (min-width:900px){
+
+.AnimeCuerpo .episodiosIndex .hover li{
+height:110px;
+width:170px;
+margin:2px;
+}
+.AnimeCuerpo .episodiosIndex .hover li a img{
+height:85px;
+width:180px;
+}
+.AnimeCuerpo .episodiosIndex .hover li a span{
+font-size:10px;
+}
+
+}
+/* FIN HOVER ANIME CAPS*/
+
+
+/* ANIME DATA RESPONSIVE*/
+@media screen and (max-width:500px){
+ 
+   .animeInfo{
+    display:block;
+   }
+
+   .animePortada{
+    display:block;
+   }
+
+   .animePortada img{
+   height:200px;
+   width:140px;
+   }
+
+   .animeData{
+    display:block;
+    width:100%;
+   }
+
+}
+
+
+
+
+
+.animeCapitulosContent .episodiosIndex .hover li a span{
+display:none;
+}
+
+.animeCapitulosContent .episodiosIndex .hover li a .idCap{
+height:20px;
+line-height:20px;
+text-align:left;
+margin:0 auto;
+font-size:12px;
+width:95%;
+white-space: nowrap;
+overflow: hidden;
+text-overflow: ellipsis;
+color:#7A8392;
+font-weight:600;
+}
+
+.animeCapitulosContent .episodiosIndex .hover li a .idCap:before{
+content:"Episodio "
+}
+
+.animeCapitulosContent .episodiosIndex{
+display:inline-block;
+float:left;
+width:calc(100% - 260px);
+}
+
+.animeRelacionados{
+display:inline-block;
+float:right;
+width:250px;
+}
+
+
+.animeCapitulosContent .x-upText{
+background:#04AEF7;
+height:40px;
+line-height:40px;
+padding:0 5px;
+color:#FFF;
+border-radius:2px;
+font-size:15px;
+font-weight:600;
+}
+
+
+.animeRelacionados .x-upText{
+background:#ff008d;
+height:40px;
+line-height:40px;
+padding:0 5px;
+color:#FFF;
+border-radius:2px;
+font-size:15px;
+font-weight:600;
+}
+
+.animeRelacionados li a{
+display:flex;
+height:100px;
+width:250px;
+color:#000;
+overflow: hidden;
+text-overflow: ellipsis;
+background:#FFF;
+
+transition:1s;
+}
+
+.animeRelacionados li a:hover{
+background:#F5F5F5;
+}
+
+.animeRelacionados li a img{
+height:90px;
+margin:3px;
+border-radius:3px;
+}
+
+.animeRelacionados li a span{
+overflow: hidden;
+text-overflow: ellipsis;
+display:inline-block;
+height:3em;
+margin:10px;
+font-weight:600;
+font-size:15px;
+}
+
+
+
+
+
+@media screen and (max-width:900px){
+
+
+.animeCapitulosContent .episodiosIndex{
+display:block;
+float:none;
+width:auto;
+margin-bottom:10px;
+}
+
+.animeRelacionados{
+display:block;
+float:none;
+width:auto;
+}
+
+.animeRelacionados li a{
+width:auto;
+}
+
+
+}
+
+
+
+.notCollection{
+height:60px;
+line-height:60px;
+background:#FFF;
+text-align:center;
+font-size:13px;
+font-weight:600;
+color:#a0a0a0;
+}
+
+
+.nextEpi{
+background:#585858;
+color:#FFF;
+padding:10px 15px;
+margin:10px 0;
+border-radius:2px;
+}
+
+.nextEpiCount{
+
+margin:10px;
+padding:10px 20px;
+font-size:25px;
+text-align:center;
+background:#585858;
+color:#FFF;
+border-radius:3px;
+}
+
+.nextEpiCount:before{
+font-family: 'FontAwesome';
+content:"\f017 ";
+}
+
+
+.notEpisodes{
+background:#676767;
+width:400px;
+max-width:90%;
+text-align:center;
+margin:15px auto;
+padding:10px;
+color:#FFF;
+border-radius:3px;
+font-size:15px;
+}
+
+.notEpisodes:before{
+   font-family: FontAwesome;
+   content: "\f119";
+   margin-right:5px;
+}
+
+
+.epiMenssge{
+width:90%;
+margin:10px auto;
+padding:10px;
+background:#656565;
+color:#FFF;
+font-size:15px;
+border-radius:3px;
+}
+
+.epiMenssge span:before{
+   font-family: FontAwesome;
+   content: "\f071";
+   margin-right:5px;
+}
+
+/* CSS FIN ANIME */
+
+
+
+/* CSS EPISODIOS */
+
+.EpisodioCuerpo{
+width:900px;
+max-width:100%;
+margin:0 auto;
+}
+
+.EpisodioTitulo{
+width:100%;
+background:#04AEF7;
+height: 40px;
+line-height: 40px;
+position:relative;
+}
+.EpisodioTitulo h1{
+font-size:14px;
+color:#FFF;
+max-width:75%;
+padding: 0 10px;
+white-space: nowrap;
+overflow: hidden;
+text-overflow: ellipsis;
+}
+.EpisodioTitulo h1:before{
+font-family:FontAwesome;
+content:"\f144";
+padding-right:3px;
+}
+
+
+.reporteEpisodio{
+  display: inline-block;
+  position: absolute;
+  right: 0;
+  top: 0;
+}
+
+.reporteEpisodio a{
+  padding: 10px 30px;
+  color: #FFF;
+  transition:1s;
+}
+
+.reporteEpisodio a:hover{
+  background: #4798de;
+}
+
+
+
+.videoEpisodio{
+margin:0 auto;
+position:relative;
+padding-bottom: 56.25%; /* 16:9 */
+background:#04AEF7;
+box-shadow:0 1px 15px rgba(0,0,0,.2);
+}
+
+.videoEpisodio .videoContent{
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+}
+
+@keyframes loadingVideo{
+100% {transform: rotate(1080deg);}
+}
+
+.videoEpisodio:before{
+font-family:FontAwesome;
+content:"\f1ce";
+color:#FFF;
+font-size:27px;
+position:absolute;
+top:50%;
+left:50%;
+animation: loadingVideo 1.6s infinite;
+}
+
+
+.episodioMessage{
+height:30px;
+line-height:30px;
+white-space: nowrap;
+overflow: hidden;
+text-overflow: ellipsis;
+padding:0 10px;
+background:#464545;
+color:#FFF;
+font-size:14px;
+}
+.episodioMessage:before{
+font-family:FontAwesome;
+content:"\f071";
+margin-right:4px;
+}
+
+.servidoresVideo{
+background:#656262;
+display: flex; 
+align-items:flex-start;
+}
+.servidoresVideo .x-text{
+display:inline-flex;
+padding:0 10px;
+height:45px;
+line-height:45px;
+background:#828282;
+color:#FFF;
+font-size:15px;
+}
+.servidoresVideo .x-text:before{
+font-family:FontAwesome;
+content:"\f233";
+padding-right:2px;
+}
+
+
+.servidoresVideo .servers{
+display: inline-flex; 
+align-items:flex-start;
+overflow:hidden;
+}
+.servidoresVideo .servers li{
+display:flex;
+flex-flow:column; 
+height:43px;
+line-height:43px;
+color:#FFF;
+font-size:15px;
+padding:0 12px;
+text-transform: capitalize;
+border-bottom:2px solid #656262;
+transition:.5s;
+cursor:pointer;
+}
+
+.servidoresVideo .servers li:hover{
+background:#7d7d7d;
+border-bottom:2px solid #04AEF7;
+}
+.servidoresVideo .servers li.x-active{
+background:#7d7d7d;
+border-bottom:2px solid #04AEF7;
+}
+
+#servidorPush{
+display:none;
+}
+
+@media screen and (max-width:950px){
+
+   #servidorPush{
+   display:inline-block;
+   height:45px;
+   width:120px;
+   line-height:45px;
+   color:#FFF;
+   background:#000;
+   text-align:center;
+   cursor:pointer;
+   float:right;
+}
+   #servidorPush:before{
+   font-family:FontAwesome;
+   content:"\f103";
+   font-size:25px;
+   transition:1s;
+   }
+
+   #servidorPush.x-on:before{
+   content:"\f102";
+   }
+
+
+   .servidoresVideo{
+   display:block;
+   }
+
+@keyframes servidores{
+from {height:43px;}
+to {height:0;}
+}
+
+@keyframes servidoresOn{
+from {height:0;}
+to {height:43px;}
+}
+
+   .servidoresVideo .servers{
+   display:block;
+   }
+
+   .servidoresVideo .servers li{
+   display:block;
+   text-align:center;
+   border:0;
+   height:0;
+   overflow:hidden;
+   animation:servidores 1s;
+   }
+
+   .servidoresVideo .servers.x-on li{
+   height:43px;
+   animation:servidores 1s;
+   }
+
+
+   .servidoresVideo .servers li:hover, .servidoresVideo .servers li.x-active{
+   border:0;
+   }
+
+}
+
+.flex{
+display:flex;
+justify-content:space-between;
+}
+
+
+.descargarEpisodio{
+display:inline-block;
+border-radius:2px;
+font-weight:600;
+box-shadow:0 0 1px rgba(0,0,0,.2);
+margin:5px 2px;
+}
+
+
+.descargarEpisodio .x-link{
+display:inline-block;
+}
+
+.descargarEpisodio .x-link a{
+height:40px;
+line-height:40px;
+background:#FFF;
+display:inline-block;
+padding:0 25px;
+border-radius:2px;
+}
+
+.descargarEpisodio .x-linkPlus{
+display:inline-block;
+}
+
+.descargarEpisodio .x-linkPlus a{
+height:40px;
+line-height:40px;
+background:#04AEF7;
+display:inline-block;
+padding:0 15px;
+border-radius:2px;
+color:#FFF;
+}
+
+.episodioNav{
+display:inline-block;
+}
+.episodioNav div{
+display:inline-block;
+margin:5px 2px;
+}
+
+.episodioNav div a{
+padding:0 25px;
+height:40px;
+line-height:40px;
+display:block;
+border-radius:2px;
+font-weight:600;
+box-shadow:0 0 1px rgba(0,0,0,.2);
+}
+
+
+.episodioNav div.anterior a{
+color:#04AEF7;
+background:#FFF;
+}
+
+.episodioNav div.lista a{
+color:#000;
+background:#FFF;
+}
+
+.episodioNav div.siguiente a{
+color:#FFF;
+background:#04AEF7;
+}
+
+
+
+
+
+@media screen and (max-width:650px){
+
+   .flex{
+    display:block;
+    }
+
+
+   .descargarEpisodio{
+    display:block;
+    width:95%;
+    text-align:center;
+    margin:5px auto;
+    }
+
+
+    .descargarEpisodio .x-link{
+    width:80%;
+    }
+
+    .descargarEpisodio .x-link a, .descargarEpisodio .x-linkPlus a{
+    display:block;
+    text-align:center;
+    }
+
+    .descargarEpisodio .x-linkPlus{
+    width:18%;
+    }
+
+    .episodioNav{
+    text-align:center;
+    display:block;
+    }
+
+
+    .episodioNav div a{
+    padding:0 50px;
+    }
+
+}
+
+@media screen and (max-width:550px){
+
+    .episodioNav div a{
+    padding:0 25px;
+    }
+
+}
+
+
+
+/* FIN CSS EPISODIOS */
+
+/* PAGINA FAVORITOS */
+
+
+.buscadorFavotiros{
+  width: 1100px;
+  max-width: 95%;
+  margin:20px auto;
+}
+
+.buscadorFavotiros input[type="text"]{
+  outline: 0;
+  border: 0;
+  padding: 3px;
+  width: 300px;
+  font-size: 14px;
+  height: 25px;
+  max-width: 60%;
+  border-radius: 2px;
+}
+
+.buscadorFavotiros input[type="submit"]{
+  height: 31px;
+  padding: 0 20px;
+  background: #04AEF7;
+  color: #FFF;
+  border: 0;
+  border-radius: 2px;
+  outline: 0;
+  max-width: 35%;
+}
+
+
+.borrarFavorito{
+  height: 25px;
+  line-height: 25px;
+  background:#f55656;
+  color: #FFF;
+  cursor: pointer;
+}
+
+
+.error{
+background:#f55656;
+width:400px;
+max-width:90%;
+line-height:40px;
+margin:40px auto;
+border-radius:2px;
+color:#FFF;
+font-size:15px;
+text-align:center;
+}
+
+
+
+/* FIN PAGINA FAVORITOS */
+
+
+/*COMENTARIOS*/
+
+.comentarios{
+width:100%;
+margin:0 auto;
+background:#FFF;
+}
+
+.comentarios .textTop{
+margin:10px auto;
+height:50px;
+line-height:50px;
+width:1100px;
+max-width:95%;
+font-size:20px;
+border-bottom:1px solid #F5F5F5;
+font-family:arial;
+}
+.comentarios .textTop span.left{
+padding-left:5px;
+color:#04AEF7;
+}
+
+.comentarios .textTop span.left:before{
+font-family:FontAwesome;
+content:"\f0e5";
+padding-right:7px;
+}
+
+
+.comentarios .textTop span.right{
+padding:0 20px;
+float:right;
+color:#000;
+cursor:pointer;
+}
+
+.comentarios .textTop span.right:before{
+font-family:FontAwesome;
+content:"\f06e";
+font-size:28px;
+}
+
+.comentarios .textTop span.right.x-off:before{
+content:"\f070";
+}
+
+
+.comentariosContent{
+margin:0 auto;
+width:1100px;
+max-width:100%;
+}
+
+.comentarios.x-off .comentariosContent{
+height:100px;
+overflow:hidden;
+text-align:center;
+padding:40px 0;
+}
+
+.comentarios.x-off .comentariosContent:before{
+content:"Comentarios Ocultos";
+padding:15px 50px;
+background:#F5F5F5;
+line-height:90px;
+font-size:18px;
+font-weight:600;
+box-shadow:0 0 15px rgba(0,0,0,.2);
+}
+
+.comentarios.x-off .comentariosContent > *{
+display:none;
+}
+
+/*FIN COMENTARIOS*/
+
+
+
+/*FOOTER*/
+footer{
+	height: 50px;
+	line-height: 50px;
+	text-align: center;
+	background: #353535;
+}
+footer span{
+	color: #FFF;
+	font-size: 15px;
+}
+/*FOOTER FIN*/
