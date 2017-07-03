@@ -8,14 +8,14 @@ $mysqli = new mysqli(HOST, USER, PASSWORD, DATABASE);
 
 
     //consultar si existe la ID enviada
-    $prep_stmt = "SELECT a.id, a.idEpisodio, a.idCrunchy, a.subRequerido, a.subtitleId, a.streamInfo, a.pass  FROM crunchyroll as a, episodios as b WHERE a.pass = 0 AND a.idEpisodio = b.id ORDER BY RAND() LIMIT 50;";
+    $prep_stmt = "SELECT a.id, a.idEpisodio, a.idCrunchy, a.subRequerido, a.subtitleId, a.streamInfo, a.pass, c.title  FROM crunchyroll as a, episodios as b, animes as c WHERE a.pass = 0 AND a.idEpisodio = b.id AND b.parentId = c.id ORDER BY RAND() LIMIT 50;";
     $stmt = $mysqli->prepare($prep_stmt);
 
     $stmt->execute();
     $stmt->store_result();
 
     //asignar valores recibidos
-    $stmt->bind_result($id, $idEpisodio, $idCrunchy, $subRequerido, $subtitleId, $streamInfo, $pass);
+    $stmt->bind_result($id, $idEpisodio, $idCrunchy, $subRequerido, $subtitleId, $streamInfo, $pass, $anime_title);
 
     //array contenedor
     $responseData = array();
@@ -29,7 +29,8 @@ $mysqli = new mysqli(HOST, USER, PASSWORD, DATABASE);
                                "subRequerido" => $subRequerido,
                                "subtitleId" => $subRequerido,
                                "streamInfo" => $streamInfo,
-                               "pass" => $pass
+                               "pass" => $pass,
+                               "anime_title" => $anime_title
                              );
     }
 
