@@ -44,6 +44,6 @@ respuesta_ok( array( "items" => $responseData, "count" => count($responseData) )
 
 
 //condiciones para responder segun la petición
-          if($GET['node'] == "pending"){
+          if($GET['value'] == "pending"){
             getIds();
           }
