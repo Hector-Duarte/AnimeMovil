@@ -22,29 +22,29 @@ function getIds(){
     $responseData = array();
 
     //ciclo para imprimir valores
-    while($stmt->fetch() ){
+    while( $stmt->fetch() ){
 
       $responseData[] = array( "id" => $id,
                                "idEpisodio" => $idEpisodio,
                                "idCrunchy" => $idCrunchy,
                                "subRequerido" => $subRequerido,
-                               "subtitleId" => $subRequerido,
+                               "subtitleId" => $subtitleId,
                                "streamInfo" => $streamInfo,
                                "pass" => $pass,
                                "anime_title" => $anime_title,
                                "anime_id" => $anime_id
                              );
-    }
+       }//fin while
 
 
-respuesta_ok( array( "items" => $responseData, "count" => count($responseData) ), 200);
+    respuesta_ok( array( "items" => $responseData, "count" => count($responseData) ), 200);
 
 }
-// fin de la function getIds
+ //fin de la function getIds
 
 
 
-//condiciones para responder segun la petición
+//condiciones para responder segun la peticion
           if($_GET['value'] == 'pending'){
             getIds();
           }
