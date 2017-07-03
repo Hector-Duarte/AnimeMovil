@@ -4,7 +4,7 @@
 $mysqli = new mysqli(HOST, USER, PASSWORD, DATABASE);
 
 //function para obtener todas las ids disponibles
-function getIds(){
+
     /* Esta funcion obtiene todas las ids con pass=0, se usara para que el proxy
       espere el subtitulo en espanil y posteriormente subira los datos y acutalizara el pass=1  */
 
@@ -38,13 +38,3 @@ function getIds(){
 
 
     respuesta_ok( array( "items" => $responseData, "count" => count($responseData) ), 200);
-
-}
- //fin de la function getIds
-
-
-
-//condiciones para responder segun la peticion
-          if($_GET['value'] == 'pending'){
-            getIds();
-          }
