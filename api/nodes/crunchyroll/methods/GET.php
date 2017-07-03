@@ -38,12 +38,13 @@ function getIds(){
 
 
 respuesta_ok( array( "items" => $responseData, "count" => count($responseData) ), 200);
+
 }
 // fin de la function getIds
 
 
 
 //condiciones para responder segun la petición
-          if($_GET['value'] == "pending"){
+          if($_GET['value'] == 'pending'){
             getIds();
           }

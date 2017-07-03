@@ -1,5 +1,7 @@
 <?php
 
+error_reporting(E_ALL); //LINEA TEMPORAL
+
 require_once("funciones.php"); //funciones y variables
 
 
