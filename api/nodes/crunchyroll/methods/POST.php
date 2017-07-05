@@ -1,11 +1,10 @@
 <?php
 
-//recibir datos del proxy 
+//recibir datos del proxy
 
 
 //abrir SQL
 $mysqli = new mysqli(HOST, USER, PASSWORD, DATABASE);
-
 
 
 //entrada de datos

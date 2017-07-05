@@ -13,6 +13,12 @@ switch ($_SERVER["REQUEST_METHOD"]) {
                  require_once("methods/POST.php");
 
         break;
+
+    case "PATCH":
+                     require_once("methods/PATCH.php");
+
+        break;
+
     case "DELETE":
                  require_once("methods/DELETE.php");
 
