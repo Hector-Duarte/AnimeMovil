@@ -60,17 +60,15 @@ $query_set = " pass = $input_pass "; //se estable el nuevo valor de pass
                                }
 
 
-echo $query_set;exit();
+//echo $query_set;exit(); para prueba y verificar la consulta armada
 
 
 //actualizar el elemento
-$prep_stmt = "UPDATE crunchyroll SET  WHERE id = ? LIMIT 1;";
+$prep_stmt = "UPDATE crunchyroll SET $query_set  WHERE id = ? AND pass = ? LIMIT 1;";
 $stmt = $mysqli->prepare($prep_stmt);
 
-$stmt->bind_param('i', $idCrunchy);
+$stmt->bind_param('ii', $_GET['value'], $input->pass); //se entrega el id que se actualizara y el pass que tiene que ser el estado actual
 $stmt->execute();
-$stmt->store_result();
 
-//asignar valores recibidos
-$stmt->bind_result($idCrunchy_sql);
-$stmt->fetch();
+
+respuesta_ok( array( "message" => "El elemento se ha actualizado" ) , 204);
