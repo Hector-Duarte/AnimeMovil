@@ -15,7 +15,16 @@ $input = json_decode(file_get_contents('php://input'));
 
 /* >>>>> OBJECT JSON
 
-
+{
+	"pass":0,
+	"update":{
+		"pass": 1,
+		"subRequerido": 1,
+		"subtitleId":11253,
+		"streamInfo":"ENCODE_BASE64",
+		"idEpisodio":53
+	}
+}
 
 */
 
