@@ -13,6 +13,13 @@ if( !is_numeric($_GET['value']) ){
 //entrada de datos
 $input = json_decode(file_get_contents('php://input'));
 
+/* >>>>> OBJECT JSON
+
+
+
+*/
+
+
 //es forzado que se mande un pass para verificar y uno para actualizar
 if( !is_numeric($input->update->pass) || !is_numeric($input->pass) ){
   error("Requerido pass actual del nodo y un nuevo pass", 400);
@@ -25,31 +32,31 @@ $query_set = " pass = $input_pass "; //se estable el nuevo valor de pass
                                //actualizar subRequerido
                                if( is_numeric($input->update->subRequerido) ){
                                  $input_subRequerido = $input->update->subRequerido;
-                                 $query_set += " , subRequerido = $input_subRequerido ";
+                                 $query_set .= " , subRequerido = $input_subRequerido ";
                                }
 
                                //actualizar subtitleId
                                if( is_numeric($input->update->subtitleId) ){
                                  $input_subtitleId = $input->update->subtitleId;
-                                 $query_set += " , subtitleId = $input_subtitleId ";
+                                 $query_set .= " , subtitleId = $input_subtitleId ";
                                }
 
                                //actualizar streamInfo
                                if($input->update->streamInfo){
                                  $input_streamInfo = $input->update->streamInfo;
-                                 $query_set += " , streamInfo = '$input_streamInfo' "; //tiene que ser base64
+                                 $query_set .= " , streamInfo = '$input_streamInfo' "; //tiene que ser base64
                                }
 
                                //actualizar idEpisodio
                                if( is_numeric($input->update->idEpisodio) ){
                                  $input_idEpisodio = $input->update->idEpisodio;
-                                 $query_set += " , idEpisodio = $input_idEpisodio ";
+                                 $query_set .= " , idEpisodio = $input_idEpisodio ";
                                }
 
                                //actualizar idCrunchy
                                if( is_numeric($input->update->idCrunchy) ){
                                  $input_idCrunchy = $input->update->idCrunchy;
-                                 $query_set += " , idCrunchy = $input_idCrunchy ";
+                                 $query_set .= " , idCrunchy = $input_idCrunchy ";
                                }
 
 
