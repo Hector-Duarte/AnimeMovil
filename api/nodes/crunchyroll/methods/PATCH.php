@@ -60,7 +60,7 @@ $query_set = " pass = $input_pass "; //se estable el nuevo valor de pass
                                }
 
 
-//echo $query_set;exit(); para prueba y verificar la consulta armada
+echo $query_set;exit();
 
 
 //actualizar el elemento
