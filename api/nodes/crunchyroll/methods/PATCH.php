@@ -16,8 +16,8 @@ $input = json_decode(file_get_contents('php://input'));
 /* >>>>> OBJECT JSON
 
 {
-	"pass":0,
-	"update":{
+	"pass":0, //el pass que se tiene que encontrar en la base para actualizar
+	"update":{ //elementos a actualizar
 		"pass": 1,
 		"subRequerido": 1,
 		"subtitleId":11253,
