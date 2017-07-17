@@ -9,7 +9,7 @@ if($_GET['value'] == 'pending'){
       espere el subtitulo en espanil y posteriormente subira los datos y acutalizara el pass=1  */
 
     //consultar todas las ids disponibles
-    $prep_stmt = "SELECT a.id, a.idEpisodio, a.idCrunchy, a.subRequerido, a.subtitleId, a.streamInfo, a.pass, c.title, c.id FROM crunchyroll as a, episodios as b, animes as c WHERE a.pass = 0 AND a.idEpisodio = b.id AND b.parentId = c.id AND c.status = 1 ORDER BY RAND() LIMIT 50;";
+    $prep_stmt = "SELECT a.id, a.idEpisodio, a.idCrunchy, a.subRequerido, a.subtitleId, a.streamInfo, a.pass, c.title, c.id FROM crunchyroll as a, episodios as b, animes as c, stream as d WHERE a.pass = 0 AND a.idEpisodio = b.id AND b.parentId = c.id AND c.status = 1 AND d.id = b.id ORDER BY RAND() LIMIT 50;";
     $stmt = $mysqli->prepare($prep_stmt);
 
     $stmt->execute();
@@ -31,8 +31,8 @@ if($_GET['value'] == 'pending'){
                                "subtitleId" => $subtitleId,
                                "streamInfo" => $streamInfo,
                                "pass" => $pass,
-                               "anime_title" => $anime_title,
-                               "anime_id" => $anime_id
+                               "parent" => array( "id" => $anime_id, "title" => $anime_title ),
+                               "episodio_stream_info" => array( "path" => $stream_path, "file" => $stream_file )
                              );
        }//fin while
 
@@ -49,14 +49,14 @@ if($_GET['value'] == 'pending'){
         espere el subtitulo en espanil y posteriormente subira los datos y acutalizara el pass=1  */
 
       //consultar todas las ids disponibles
-      $prep_stmt = "SELECT a.id, a.idEpisodio, a.idCrunchy, a.subRequerido, a.subtitleId, a.streamInfo, a.pass, c.title, c.id FROM crunchyroll as a, episodios as b, animes as c WHERE a.pass = 1 AND a.idEpisodio = b.id AND b.parentId = c.id AND c.status = 1 ORDER BY RAND() LIMIT 50;";
+      $prep_stmt = "SELECT a.id, a.idEpisodio, a.idCrunchy, a.subRequerido, a.subtitleId, a.streamInfo, a.pass, c.title, c.id, d.path, d.file FROM crunchyroll as a, episodios as b, animes as c, stream as d WHERE a.pass = 1 AND a.idEpisodio = b.id AND b.parentId = c.id AND c.status = 1 AND d.id = b.id ORDER BY RAND() LIMIT 50;";
       $stmt = $mysqli->prepare($prep_stmt);
 
       $stmt->execute();
       $stmt->store_result();
 
       //asignar valores recibidos
-      $stmt->bind_result($id, $idEpisodio, $idCrunchy, $subRequerido, $subtitleId, $streamInfo, $pass, $anime_title, $anime_id);
+      $stmt->bind_result($id, $idEpisodio, $idCrunchy, $subRequerido, $subtitleId, $streamInfo, $pass, $anime_title, $anime_id, $stream_path, $stream_file);
 
       //array contenedor
       $responseData = array();
@@ -71,8 +71,8 @@ if($_GET['value'] == 'pending'){
                                  "subtitleId" => $subtitleId,
                                  "streamInfo" => $streamInfo,
                                  "pass" => $pass,
-                                 "anime_title" => $anime_title,
-                                 "anime_id" => $anime_id
+                                 "parent" => array( "id" => $anime_id, "title" => $anime_title ),
+                                 "episodio_stream_info" => array( "path" => $stream_path, "file" => $stream_file )
                                );
          }//fin while
 
