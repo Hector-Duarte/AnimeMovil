@@ -1,3 +1,3 @@
 <?php
 
-/* ajustes para todo el sitio */
+/* ajustes para todo el sitio  basicos */
