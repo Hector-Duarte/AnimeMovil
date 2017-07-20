@@ -4,13 +4,8 @@
 $mysqli = new mysqli(HOST, USER, PASSWORD, DATABASE);
 
 
-    $prep_stmt = "SELECT id, slug FROM animes WHERE status = 1 AND title LIKE ? LIMIT ? OFFSET ?;";
-    $stmt = $mysqli->prepare($prep_stmt);
 
-
-
-
-//consulta para cadena 
+//consulta para cadena
 function sql_like(){
     if( $_GET["q"] AND strlen( $_GET["q"] ) <= 70  ){
     $text = str_replace(' ', '-', $_GET["q"]);
@@ -75,7 +70,7 @@ function sql_limit(){
   }
    }
 
-    $prep_stmt = "SELECT DISTINCT a.id, a.title, a.slug FROM animes as a, generos as b WHERE ". sql_like() ." AND ". sql_letra() ." AND ". sql_genero() ." AND ". sql_estado() ." ORDER BY a.id desc LIMIT ". sql_limit() ." OFFSET ". sql_offset() ." ;";
+    $prep_stmt = "SELECT DISTINCT a.id, a.title, a.slug FROM animes as a, generos as b WHERE ". sql_like() ." AND ". sql_letra() ." AND ". sql_genero() ." AND ". sql_estado() ." AND a.status = 1 ORDER BY a.id desc LIMIT ". sql_limit() ." OFFSET ". sql_offset() ." ;";
 
 
 
@@ -87,11 +82,11 @@ function sql_limit(){
 
     //asignar valores recibidos
     $stmt->bind_result($id, $title, $slug);
-    
 
 
 
-               
+
+
               $resultados = array();
 
 
