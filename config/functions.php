@@ -157,7 +157,7 @@ function createSession($usuario, $password){
         $_SESSION['session_expire'] = $session_expire; //cuando expira la session (14 dias)
         $_SESSION['session_ip'] = $session_IP; //la IP para authenticar que es dueño de la cookie el usuario.
 
-         respuesta_ok( array( "id" => $session_id, "ip" => $session_IP, "lever" => $session_user_level, "expire" => date('m-d-Y H:i:s GMT', $session_expire )  ) , 201); //retornar la id generada y terminar function
+         respuesta_ok( array( "id" => $session_id, "ip" => $session_IP, "lever" => $session_user_level, "expire" => date('m-d-Y H:i:s', $session_expire ).' GMT'  ) , 201); //retornar la id generada y terminar function
 
        } //fin de else
 } //fin de createSession
