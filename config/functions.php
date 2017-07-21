@@ -133,6 +133,7 @@ function createSession($usuario, $password){
 
          //iniciar sesion
          ini_set('session.use_cookies', 0); //evitar que se envie una cookie en automatico
+         session_name("session_id"); //cambiar el nombre de la session
          session_start([
            'cookie_lifetime' => 1209600,
          ]);
