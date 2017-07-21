@@ -12,4 +12,6 @@ $password = $input->password;
 
 if( isset($username) and isset($password) ){ //validar si son aceptables los valores
 createSession($username, $password);
+}else{
+  error('ingresa información valida.', 400);
 }

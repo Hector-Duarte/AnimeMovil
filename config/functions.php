@@ -132,14 +132,17 @@ function createSession($usuario, $password){
          unset($db_salt);
 
          //iniciar sesion
+         ini_set('session.use_cookies', 0); //evitar que se envie una cookie en automatico
          session_start([
-           'cookie_lifetime' => 604800,
+           'cookie_lifetime' => 1209600,
          ]);
-         $session_id=session_id();
+         $session_id = session_id();
+         $session_expire = time()+1209600; //expira en 14 dias la session
                          $_arraysign = array();
                           $_arraysign[] = $session_user_id; //id del usuario
                           $_arraysign[] = $session_user_name; //nombre de usuario
-                          $_arraysign[] = $session_id; //session id
+                          $_arraysign[] = $session_expire; //tiempo de expiracion de la session
+                          $_arraysign[] = $session_id; //session id (la session generada por php)
                           $_arraysign[] = $session_user_level; //nivel de usuario (0=admin && 1=usuario estandar)
                           $_arraysign[] = SIGNATURE_HASH_USER; //key hash
 
@@ -147,8 +150,13 @@ function createSession($usuario, $password){
 
                          $session_hash = base64_encode( hash_hmac('sha256', urldecode(utf8_encode($_str2sign)), base64_decode($key), true) ); //hast token para verificar sesion
 
+        //guardar información del usuario en la sesion
+        $_SESSION['user_id'] = $session_user_id; //asignar el id del usuario
+        $_SESSION['user_name'] = $session_user_name; //asignar el username del usuario
+        $_SESSION['user_level'] = $session_user_level; //asignar el nivel del usuario (0 es admin y 1 es usuario normal)
+        $_SESSION['session_expire'] = $session_expire; //cuando expira la session (14 dias)
 
+         respuesta_ok( array( "id" => $session_id, "auth" => $session_hash, "lever" => $session_user_level, "expire" => date('m-d-Y H:i:s', $session_expire )  ) , 201); //retornar la id generada y terminar function
 
-         respuesta_ok( array( "id" => $session_id, "auth" => $session_hash, "lever" => $session_user_level, "expire" => date('m-d-Y H:i:s', time()+604800 )  ) , 201); //retornar la id generada y terminar function
        } //fin de else
 } //fin de createSession
