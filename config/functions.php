@@ -106,23 +106,26 @@ function createSession($usuario, $password){
 
   // Obtiene las variables del resultado.
           $stmt->bind_result($db_password, $db_salt, $session_user_level, $session_user_name, $session_user_id);
-          $stmt->fetch();
+
+          //verificar si la consulta retorno usuario
+          if( !$stmt->fetch() ){
+            error('No existe el usuario, verifica tu información.', 403); //el usuario no es valido
+          }
+
+
   /* cerrar conexion */
   $mysqli->close();
+
 
 
   // Crea un hash con la contrasena y el salt.
   $password = hash('sha512', $password . $db_salt);
 
-
-
-
-
-         // comprobar autenticacion
+         // comprobar autenticacion de contraseñas
               if ( $password!=$db_password ) {
 
                        //contrasena incorrecta
-                       error('Verifica tu información.', 403);
+                       error('Verifica tu contraseña.', 403);
 
               }else{
 
