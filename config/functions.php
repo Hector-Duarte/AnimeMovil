@@ -150,39 +150,5 @@ function createSession($usuario, $password){
 
 
          respuesta_ok( array( "id" => $session_id, "auth" => $session_hash, "expire" => date('m/d/Y', time()+604800 )  ) , 201); //retornar la id generada y terminar function
-
-/*
-                //valores de las cookies
-                $session_expire = time()+1296000; //expira en 15 dias
-                $session_id = uniqid(); //id de session unica
-
-
-                $_arraysign = array();
-                 $_arraysign[] = $session_user_id; //id del usuario
-                 $_arraysign[] = $session_user_name; //nombre de usuario
-                 $_arraysign[] = $session_id; //session id
-                 $_arraysign[] = $session_user_level; //nivel de usuario (0=admin && 1=usuario estandar)
-                 $_arraysign[] = $session_expire; //expira en 15 dias
-                 $_arraysign[] = SIGNATURE_HASH_USER; //key hash
-
-                 $_str2sign = implode("\n", $_arraysign);
-
-                $session_hash = base64_encode( hash_hmac('sha256', urldecode(utf8_encode($_str2sign)), base64_decode($key), true) ); //hast token para verificar sesion
-
-
-                //asignar cookies
-                setcookie("session_user_id", $session_user_id, $session_expire, "/");
-                setcookie("session_user_name", $session_user_name, $session_expire, "/");
-                setcookie("session_id", $session_id, $session_expire, "/");
-                setcookie("session_user_level", $session_user_level, $session_expire, "/");
-                setcookie("session_expire", $session_expire, $session_expire, "/");
-                setcookie("session_hash", $session_hash, $session_expire, "/");
-
-
-
-         //enviar al panel
-         header("Location: /panel");
-         exit();
-       }
-       */
+       } //fin de else
 } //fin de createSession
