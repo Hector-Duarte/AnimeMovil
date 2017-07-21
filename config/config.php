@@ -7,10 +7,10 @@ define('API_PATH', '/api/'); //api path
 
 
 //base de datos
-define("DB_HOST", "localhost");     // El alojamiento al que deseas conectarte
-define("DB_USER", "root");    // El nombre de usuario de la base de datos
-define("DB_PASSWORD", "7445018937");    // La contraseña de la base de datos
-define("DB_DATABASE", "animemovil");    // El nombre de la base de datos
+define("HOST", "localhost");     // El alojamiento al que deseas conectarte
+define("USER", "root");    // El nombre de usuario de la base de datos
+define("PASSWORD", "7445018937");    // La contraseña de la base de datos
+define("DATABASE", "animemovil");    // El nombre de la base de datos
 
 //claves de acceso
 define("KEYAPI", "b62G8GbE8wWkMUwN8177ugjemiHIkf7e1A");    // api key access
@@ -19,7 +19,7 @@ define("SIGNATURE_HASH_USER", "R7KbpdZX6i/HwTQwRv/Pl1_V61vMsBfimVWlp/Ny8ooA="); 
 
 //paths
 define("PATH_SYSTEM", "/var/www/html/"); //system path
-define("PATH_CACHE", "/var/www/html/assets/cache/"); //cache path
+define("CACHE_PATH", "/var/www/html/assets/cache/"); //cache path
 
 
 //headers
