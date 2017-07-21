@@ -149,6 +149,6 @@ function createSession($usuario, $password){
 
 
 
-         respuesta_ok( array( "id" => $session_id, "auth" => $session_hash, "expire" => date('m-d-Y H:i:s', time()+604800 )  ) , 201); //retornar la id generada y terminar function
+         respuesta_ok( array( "id" => $session_id, "auth" => $session_hash, "lever" => $session_user_level, "expire" => date('m-d-Y H:i:s', time()+604800 )  ) , 201); //retornar la id generada y terminar function
        } //fin de else
 } //fin de createSession
