@@ -162,3 +162,62 @@ function createSession($usuario, $password){
 
        } //fin de else
 } //fin de createSession
+
+//verificar session
+function checkSession($session_id, $callback){
+  /* esta functión se encargara de revisar que la sessión del usuario sea valida.
+   callcabs: API responde en formato json, PAGUE retorna la variable definida "USER_SESSION" como false.
+  */
+       //filtrar session_id
+       $session_id = preg_replace("/[^A-Za-z0-9\-]/", "", $session_id);
+       if( !isset($session_id) ){ //si la session_id no es valida
+         switch ($callback) {
+           case 'API': //para la api
+             error('session_id no valida.', 403); //error, aborta toda la solicitud
+             break;
+
+          case 'PAGUE': //para las paginas
+             define('SESSION_STATUS', false); //la session la regresa como false, pero el proceso sigue.
+             break;
+
+           default: //algo esta mal, el callback no es valido.
+             error('El callback para la verificación de la session_id no es valido.', 500); //algo esta mal. detiene toda la solicitud por seguridad.
+             break;
+         }
+       }
+
+
+       //validar sesion
+       ini_set('session.use_cookies', 0); //evitar que se envie una cookie en automatico
+       session_name("session_id"); //cambiar el nombre de la session
+       session_id($session_id); //asignar la id pasada para la session
+
+       //obtener la ip del usuario
+       if (isset($_SERVER["HTTP_CF_CONNECTING_IP"])) {
+        $session_IP = $_SERVER["HTTP_CF_CONNECTING_IP"]; //usar la ip obtenida por cloudflare
+      }else{
+        $session_IP = $_SERVER['REMOTE_ADDR']; //usar la ip optenida por php (si no se usa cloudflare como cdn)
+      }
+
+      //validar por IP
+      if($session_IP === $_SESSION['session_ip']){ //la session es valida
+        define('SESSION_STATUS', true); //definir true ya que la session es valida.
+      }else{ //la session no es valida.
+
+        switch ($callback) {
+          case 'API': //para la api
+            error('session_id no valida.', 403); //error, aborta toda la solicitud
+            break;
+
+         case 'PAGUE': //para las paginas
+            define('SESSION_STATUS', false); //la session la regresa como false, pero el proceso sigue.
+            break;
+
+          default: //algo esta mal, el callback no es valido.
+            error('El callback para la verificación de la session_id no es valido.', 500); //algo esta mal. detiene toda la solicitud por seguridad.
+            break;
+        }//fin de switch
+        
+      }//fin de else (validar ip)
+
+}
