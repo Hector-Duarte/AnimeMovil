@@ -100,6 +100,25 @@ if (isset($_SERVER["HTTP_CF_CONNECTING_IP"])) {
 } //fin de getUserIp
 
 
+//generador de hash
+function generateHash($input){
+      $_arraysign = array();
+      $_arraysign[] = $input; //entrada de data
+      $_arraysign[] = $_SERVER['HTTP_USER_AGENT']; //agente de usuario del navegador
+      $_arraysign[] = getUserIp(); //IP del usuario
+      $_arraysign[] = SIGNATURE_HASH; //key hash
+
+      $_str2sign = implode("\n", $_arraysign);
+
+      return base64_encode( hash_hmac('sha256', urldecode(utf8_encode($_str2sign)), base64_decode(SIGNATURE_HASH), true) ); //hash para retornar
+}
+//fin generador de hash
+
+
+
+
+
+
 
 //crear session
 function createSession($usuario, $password){
@@ -120,12 +139,11 @@ function createSession($usuario, $password){
 
           //verificar si la consulta retorno usuario
           if( !$stmt->fetch() ){
-            error('No existe el usuario, verifica tu información.', 403); //el usuario no es valido
+            error('No existe el usuario, verifica tu información.', 403); //el usuario no es existe
           }
 
 
-  /* cerrar conexion */
-  $mysqli->close();
+
 
 
 
@@ -145,28 +163,23 @@ function createSession($usuario, $password){
          unset($db_password);
          unset($db_salt);
 
-         //iniciar sesion
-         ini_set('session.use_cookies', 0); //evitar que se envie una cookie en automatico
-         session_name("session_id"); //cambiar el nombre de la session
-         session_start([
-           'cookie_lifetime' => 1209600,
-         ]);
-         $session_id = session_id();
-         $session_expire = time()+1209600; //expira en 14 dias la session
+         //procotolo para crear la sesion
+         $token_expire = time() + 1296000; //expira en 15 dias
+         $token_access = generateHash($session_user_id.$session_user_name.$session_user_level.$token_expire); //token hash de acceso para la sesión
 
-        //obtener la ip del usuario
-        $session_IP = getUserIp();
+         //insertar datos en la tabla de sessiones
+         $prep_stmt = "INSERT INTO sessions(user_id, user_level, ip, token, expire) VALUES (?,?,?,?,?);";
+         $stmt = $mysqli->prepare($prep_stmt);
+         $stmt->bind_param('iissi', $session_user_id, $session_user_level, getUserIp(), $token_access, $token_expire);
+         $stmt->execute();
 
-        //guardar información del usuario en la sesion
-        $_SESSION['user_id'] = $session_user_id; //asignar el id del usuario
-        $_SESSION['user_name'] = $session_user_name; //asignar el username del usuario
-        $_SESSION['user_level'] = $session_user_level; //asignar el nivel del usuario (0 es admin y 1 es usuario normal)
-        $_SESSION['session_expire'] = $session_expire; //cuando expira la session (14 dias)
-        $_SESSION['session_ip'] = $session_IP; //la IP para authenticar que es dueño de la cookie el usuario.
 
-         respuesta_ok( array( "id" => $session_id, "ip" => $session_IP, "leven" => $session_user_level, "expire" => date('m-d-Y H:i:s', $session_expire )  ) , 201); //retornar la id generada y terminar function
+         respuesta_ok( array( "id" => $stmt->insert_id, "expire" => date('m-d-Y H:i:s', $token_expire )  ) , 201); //retornar la id generada y terminar function
 
        } //fin de else
+
+       /* cerrar conexion */
+       $mysqli->close();
 } //fin de createSession
 
 //verificar session
