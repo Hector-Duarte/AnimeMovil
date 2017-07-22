@@ -151,7 +151,7 @@ function createSession($usuario, $password){
   $password = hash('sha512', $password . $db_salt);
 
          // comprobar autenticacion de contraseñas
-              if ( !hash_equals($db_password, $password) ) {
+              if ( $password!=$db_password ) {
 
                        //contrasena incorrecta
                        error('Verifica tu contraseña.', 403);
