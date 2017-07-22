@@ -173,8 +173,10 @@ function createSession($usuario, $password){
          $stmt->bind_param('iissi', $session_user_id, $session_user_level, getUserIp(), $token_access, $token_expire);
          $stmt->execute();
 
+         $session_id = $stmt->insert_id; //ID de la session
 
-         respuesta_ok( array( "id" => $stmt->insert_id, "auth" => $token_access, "expire" => date('d-m-Y H:i:s', $token_expire )  ) , 201); //retornar la id generada y terminar function
+
+         respuesta_ok( array( "id" => $session_id, "auth" => "$session_id:$token_access", "expire" => $token_expire  ) , 201); //retornar la id generada y terminar function
 
        } //fin de else
 
