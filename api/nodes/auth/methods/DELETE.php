@@ -14,7 +14,7 @@ checkSession($session_id, 'API');
 
       if(SESSION_STATUS){ //si la session es valida.
         session_destroy();//destruir session
-        setcookie("session_id", false, time() - 3600, "/");
+        setcookie("session_id", null, -1, "/");
            respuesta_ok( array( "message" => "Se hace cerrado la sessión." ) , 204);
       }
 
