@@ -175,8 +175,10 @@ function createSession($usuario, $password){
 
          $session_id = $stmt->insert_id; //ID de la session
 
+         $hash_check = generateHash($session_id.$token_access);
 
-         respuesta_ok( array( "id" => $session_id, "auth" => "$session_id:$token_access", "expire" => $token_expire  ) , 201); //retornar la id generada y terminar function
+
+         respuesta_ok( array( "id" => $session_id, "auth" => "$session_id:$token_access:$hash_ckeck", "expire" => $token_expire  ) , 201); //retornar la id generada y terminar function
 
        } //fin de else
 
