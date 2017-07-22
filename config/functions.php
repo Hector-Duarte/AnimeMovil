@@ -191,7 +191,8 @@ function checkSession($session_id, $callback){
        ini_set('session.use_cookies', 0); //evitar que se envie una cookie en automatico
        session_name("session_id"); //cambiar el nombre de la session
        session_id($session_id); //asignar la id pasada para la session
-
+       session_start(); //iniciar session
+       
        //obtener la ip del usuario
        if (isset($_SERVER["HTTP_CF_CONNECTING_IP"])) {
         $session_IP = $_SERVER["HTTP_CF_CONNECTING_IP"]; //usar la ip obtenida por cloudflare
@@ -217,7 +218,7 @@ function checkSession($session_id, $callback){
             error('El callback para la verificación de la session_id no es valido.', 500); //algo esta mal. detiene toda la solicitud por seguridad.
             break;
         }//fin de switch
-        
+
       }//fin de else (validar ip)
 
 }
