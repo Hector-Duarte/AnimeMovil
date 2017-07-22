@@ -90,6 +90,16 @@ if($_COOKIE["session_hash"]){
 
 /* FUNCTIONS EXPERIMENTAS */
 
+//obtener IP de usuario
+function getUserIp(){
+if (isset($_SERVER["HTTP_CF_CONNECTING_IP"])) {
+ return $_SERVER["HTTP_CF_CONNECTING_IP"]; //usar la ip obtenida por cloudflare
+}else{
+ return $_SERVER['REMOTE_ADDR']; //usar la ip optenida por php (si no se usa cloudflare como cdn)
+}
+} //fin de getUserIp
+
+
 
 //crear session
 function createSession($usuario, $password){
@@ -145,11 +155,7 @@ function createSession($usuario, $password){
          $session_expire = time()+1209600; //expira en 14 dias la session
 
         //obtener la ip del usuario
-        if (isset($_SERVER["HTTP_CF_CONNECTING_IP"])) {
-         $session_IP = $_SERVER["HTTP_CF_CONNECTING_IP"]; //usar la ip obtenida por cloudflare
-       }else{
-         $session_IP = $_SERVER['REMOTE_ADDR']; //usar la ip optenida por php (si no se usa cloudflare como cdn)
-       }
+        $session_IP = getUserIp();
 
         //guardar información del usuario en la sesion
         $_SESSION['user_id'] = $session_user_id; //asignar el id del usuario
@@ -194,11 +200,7 @@ function checkSession($session_id, $callback){
        session_start(); //iniciar session
 
        //obtener la ip del usuario
-       if (isset($_SERVER["HTTP_CF_CONNECTING_IP"])) {
-        $session_IP = $_SERVER["HTTP_CF_CONNECTING_IP"]; //usar la ip obtenida por cloudflare
-      }else{
-        $session_IP = $_SERVER['REMOTE_ADDR']; //usar la ip optenida por php (si no se usa cloudflare como cdn)
-      }
+       $session_IP = getUserIp();
 
       //validar por IP
       if($session_IP === $_SESSION['session_ip']){ //la session es valida
