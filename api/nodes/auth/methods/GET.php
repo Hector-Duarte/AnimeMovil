@@ -2,12 +2,14 @@
 
 //validar session
 
-//entrada de datos
-$input = json_decode(file_get_contents('php://input'));
-
 //asignar valores
-$session_id = $_COOKIE['session_id'];
-
+if($_COOKIE['session_id']){
+  $session_id = $_COOKIE['session_id']; //asignar de cookie
+}else if($_GET['session_id']){
+  $session_id = $_GET['session_id']; //asignar de parametro GET ?session_id=IDSESSION
+}else{
+    error('session_id necesaria.', 400); //no se han encontrado parametros validos.
+}
 
 if( isset($session_id) ){ //validar si son aceptables los valores
 checkSession($session_id, 'API');
@@ -27,5 +29,5 @@ checkSession($session_id, 'API');
       }
 
 }else{
-  error('cookie no valida.', 400);
+  error('session_id no valida.', 400);
 }
