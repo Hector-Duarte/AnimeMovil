@@ -16,7 +16,7 @@ checkSession($session_id, 'API');
 
       if(SESSION_STATUS){ //si la session es valida.
 
-        setcookie("session_id", $_SESSION['session_ip'], $_SESSION['session_expire'], "/"); //asignar cookie
+        setcookie("session_id", session_id(), $_SESSION['session_expire'], "/"); //asignar cookie
 
         respuesta_ok( array(
         "id" => session_id(),
