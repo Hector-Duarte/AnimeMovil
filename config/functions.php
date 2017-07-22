@@ -151,7 +151,7 @@ function createSession($usuario, $password){
   $password = hash('sha512', $password . $db_salt);
 
          // comprobar autenticacion de contraseñas
-              if ( $password!=$db_password ) {
+              if ( !hash_equals($db_password, $password) ) {
 
                        //contrasena incorrecta
                        error('Verifica tu contraseña.', 403);
@@ -174,7 +174,7 @@ function createSession($usuario, $password){
          $stmt->execute();
 
 
-         respuesta_ok( array( "id" => $stmt->insert_id, "expire" => date('m-d-Y H:i:s', $token_expire )  ) , 201); //retornar la id generada y terminar function
+         respuesta_ok( array( "id" => $stmt->insert_id, "auth" => $token_access, "expire" => date('d-m-Y H:i:s', $token_expire )  ) , 201); //retornar la id generada y terminar function
 
        } //fin de else
 
