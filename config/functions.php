@@ -191,12 +191,10 @@ function checkSession($session_id, $callback){
   /* esta functión se encargara de revisar que la sessión del usuario sea valida.
    callcabs: API responde en formato json, PAGUE retorna la variable definida "USER_SESSION" como false.
   */
-       //filtrar session_id
-       $session_id = preg_replace("/[^A-Za-z0-9\-]/", "", $session_id);
-       if( !isset($session_id) ){ //si la session_id no es valida
+
          switch ($callback) {
            case 'API': //para la api
-             error('session_id no valida.', 403); //error, aborta toda la solicitud
+             error('session no valida.', 403); //error, aborta toda la solicitud
              break;
 
           case 'PAGUE': //para las paginas
@@ -204,10 +202,10 @@ function checkSession($session_id, $callback){
              break;
 
            default: //algo esta mal, el callback no es valido.
-             error('El callback para la verificación de la session_id no es valido.', 500); //algo esta mal. detiene toda la solicitud por seguridad.
+             error('El callback para la verificación de la session no es valido.', 500); //algo esta mal. detiene toda la solicitud por seguridad.
              break;
          }
-       }
+
 
 
        //validar sesion
