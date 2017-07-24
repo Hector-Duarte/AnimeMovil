@@ -1,23 +1,29 @@
 <?php
 
 //validar session
-
-//entrada de datos
-$input = json_decode(file_get_contents('php://input'));
-
-//asignar valores
-$session_id = $input->session_id;
+checkSession('API', false); //'API' es el tipo de callback y el false es que no es necesario que sea admin
 
 
-if( isset($session_id) ){ //validar si son aceptables los valores
-checkSession($session_id, 'API');
+if(SESSION_STATUS){ //si la session es valida.
+  //abrir sql
+  $mysqli = new mysqli(HOST, USER, PASSWORD, DATABASE);
 
-      if(SESSION_STATUS){ //si la session es valida.
-        session_destroy();//destruir session
-        setcookie("session_id", null, -1, "/");
-           respuesta_ok( array( "message" => "Se hace cerrado la sessión." ) , 204);
-      }
+      $prep_stmt = "DELETE from sessions WHERE id=? LIMIT 1;";
+      $stmt = $mysqli->prepare($prep_stmt);
+      $stmt->bind_param('i', SESSION_ID); //pasar la id de la session
+      $stmt->execute(); //ejecutar borrado
 
-}else{
-  error('session_id no valida.', 400);
+      $del_exitoso = $stmt->affected_rows; //obtiene el numero de filas borradas (tiene que ser 1 que es true)
+
+          $stmt->close(); //cerrar sentencia
+          $mysqli->close(); //cerrar sql
+
+
+          //responder al usuario
+          if($del_exitoso == 1){ //el borrado fue correcto
+            respuesta_ok( array( "message" => "se ha cerrado la sesión exitosamente." ) , 200);
+          }else{//no se ha borrado la session.
+            error('Ha ocurrido un error y no se ha cerrado la sesión.', 400);
+          }
+
 }

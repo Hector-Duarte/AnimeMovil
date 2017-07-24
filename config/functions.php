@@ -148,7 +148,7 @@ function checkSession($callback, $varify_admin){
                 //abrir sql
                 $mysqli = new mysqli(HOST, USER, PASSWORD, DATABASE);
 
-                    $prep_stmt = "SELECT user_id, user_level, ip, token, expire from sessions WHERE id=? LIMIT 1;";
+                    $prep_stmt = "SELECT user_id, user_level, ip, token, expire, id from sessions WHERE id=? LIMIT 1;";
                     $stmt = $mysqli->prepare($prep_stmt);
                     $stmt->bind_param('i', $auth_token[0]); //pasar la id de la session
                     $stmt->execute();
@@ -156,14 +156,22 @@ function checkSession($callback, $varify_admin){
 
 
                         //Obtiene las variables del resultado.
-                        $stmt->bind_result($user_id, $user_level, $ip, $token, $expire);
+                        $stmt->bind_result($user_id, $user_level, $ip, $token, $expire, $session_id);
+                        $stmt->fetch();
+                        $num_rows = $stmt->num_rows(); //obtener el numero de filas obtenidas.
+                        $stmt->close(); //cerrar sentencia
+                        $mysqli->close(); //cerrar sql
 
                         //verificar si la consulta retorno usuario
-                        if( $stmt->fetch() ){
+                        if( $num_rows == 1 ){
+
                           //la session se ha encontrado, proceder a validar
                           if($token == $auth_token[1] and $ip == getUserIp() and $expire > time() ){ //se valida todos los datos para autorizar session
                                   //la session es valida :D
                                   define('SESSION_STATUS', true); //definir session como valida como cierta
+                                  define('USER_ID', $user_id); //la id del usuario
+                                  define('SESSION_ID', $session_id); //la id de la session
+
 
                                     //validar si es usuario normal | 0 es admin y 1 es usuario normal
                                     if($user_level === 1){//es usuario normal
