@@ -124,7 +124,7 @@ function generateHash($input){
 function createSession($usuario, $password){
 /* Esta función solo se usara en la api por lo que no necesita diferentes tipos de callbaks */
 
-  //obtener SALT de db
+  //abrir sql
   $mysqli = new mysqli(HOST, USER, PASSWORD, DATABASE);
 
       $prep_stmt = "SELECT password, salt, level, user, id from usuarios WHERE user=? LIMIT 1;";
@@ -165,7 +165,7 @@ function createSession($usuario, $password){
 
          //procotolo para crear la sesion
          $token_expire = time() + 1296000; //expira en 15 dias
-         $token_access = generateHash($session_user_id.$session_user_name.$session_user_level.$token_expire); //token hash de acceso para la sesión
+         $token_access = generateHash($session_user_id.$session_user_name.$session_user_level.$token_expire); //token hash de acceso para la sesión --- hash_primary
 
          //insertar datos en la tabla de sessiones
          $prep_stmt = "INSERT INTO sessions(user_id, user_level, ip, token, expire) VALUES (?,?,?,?,?);";
@@ -175,7 +175,7 @@ function createSession($usuario, $password){
 
          $session_id = $stmt->insert_id; //ID de la session
 
-         $hash_check = generateHash($session_id.$token_access);
+         $hash_check = generateHash($session_id.$token_access); //hash_secundary
 
 
          respuesta_ok( array( "auth" => "$session_id:$token_access:$hash_check", "expire" => $token_expire, "expire_in" => 1296000  ) , 201); //retornar la id generada y terminar function
@@ -187,55 +187,96 @@ function createSession($usuario, $password){
 } //fin de createSession
 
 //verificar session
-function checkSession($session_id, $callback){
+function checkSession($callback, $varify_admin){
   /* esta functión se encargara de revisar que la sessión del usuario sea valida.
    callcabs: API responde en formato json, PAGUE retorna la variable definida "USER_SESSION" como false.
   */
-
-         switch ($callback) {
-           case 'API': //para la api
-             error('session no valida.', 403); //error, aborta toda la solicitud
-             break;
-
-          case 'PAGUE': //para las paginas
-             define('SESSION_STATUS', false); //la session la regresa como false, pero el proceso sigue.
-             break;
-
-           default: //algo esta mal, el callback no es valido.
-             error('El callback para la verificación de la session no es valido.', 500); //algo esta mal. detiene toda la solicitud por seguridad.
-             break;
-         }
-
+       //obtener el auth
+       if($_COOKIE['auth']){
+         $auth_token = $_COOKIE['auth']; //obtener el auth de las cookies
+       }else if($_POST['auth']){
+         $auth_token = $_POST['auth']; //obtener el auth de variable POST
+       }else{
+         $auth_token=false; //el auth no existe
+       }
 
 
        //validar sesion
-       ini_set('session.use_cookies', 0); //evitar que se envie una cookie en automatico
-       session_name("session_id"); //cambiar el nombre de la session
-       session_id($session_id); //asignar la id pasada para la session
-       session_start(); //iniciar session
+       if($auth_token){
+         //el token existe, validar los hash para posteriormente abrir la conexión sql
+         $auth_token = explode(':', $auth_token);
+            if( count($auth_token) === 3 ){ //tienen que ser 3 para que se proceda a la validación de hashs
+              //se retornaron 3 divisiones en total (id_session:hash_primary:hash_secundary)
 
-       //obtener la ip del usuario
-       $session_IP = getUserIp();
+              //resolver el hash_secundary
+              $hash_check = generateHash($auth_token[0].$auth_token[1]); //regenerar el hash_secundary
+              if($hash_check === $auth_token[2]){ //el hash generador de session_id y hash_primary tiene que dar como resultado el hash_secundary
+                //el hash secundary fue resuelto correctamente (esto confirma que el session_id y el hash_primary no fueron alterados)
+                //consultar el session_id en la tabla sessions
 
-      //validar por IP
-      if($session_IP === $_SESSION['session_ip']){ //la session es valida
-        define('SESSION_STATUS', true); //definir true ya que la session es valida.
-      }else{ //la session no es valida.
+                //abrir sql
+                $mysqli = new mysqli(HOST, USER, PASSWORD, DATABASE);
 
-        switch ($callback) {
-          case 'API': //para la api
-            error('session_id no valida.', 403); //error, aborta toda la solicitud
-            break;
+                    $prep_stmt = "SELECT user_id, user_level, ip, token, expire from sessions WHERE id=? LIMIT 1;";
+                    $stmt = $mysqli->prepare($prep_stmt);
+                    $stmt->bind_param('i', $auth_token[0]); //pasar la id de la session
+                    $stmt->execute();
+                    $stmt->store_result();
 
-         case 'PAGUE': //para las paginas
-            define('SESSION_STATUS', false); //la session la regresa como false, pero el proceso sigue.
-            break;
 
-          default: //algo esta mal, el callback no es valido.
-            error('El callback para la verificación de la session_id no es valido.', 500); //algo esta mal. detiene toda la solicitud por seguridad.
-            break;
-        }//fin de switch
+                        //Obtiene las variables del resultado.
+                        $stmt->bind_result($user_id, $user_level, $ip, $token, $expire);
 
-      }//fin de else (validar ip)
+                        //verificar si la consulta retorno usuario
+                        if( $stmt->fetch() ){
+                          //la session se ha encontrado, proceder a validar
+                          if($token === $auth_token[1] and $ip === getUserIp() and $expire > time() ){ //se valida todos los datos para autorizar session
+                                  //la session es valida :D
+                                  define('SESSION_STATUS', true); //definir session como valida como cierta
 
-}
+                                    //validar si es usuario normal | 0 es admin y 1 es usuario normal
+                                    if($user_level === 1){//es usuario normal
+                                        define('IS_ADMIN', false); //no es admin
+                                    }else if($user_level === 0){// es admin
+                                        define('IS_ADMIN', true); // ¡SI ES ADMIN!
+                                    }else{//algo esta mal, detener todo
+                                        error('Algo esta mal, limpia los datos de tu navegador y vuelve a iniciar sessión.', 500);
+                                        //la funcion error detiene todo en automatico.
+                                    }
+
+
+
+                          }else{
+                            //la validación no fue correcta.
+                            define('SESSION_STATUS', false);
+                            define('IS_ADMIN', false); //no es admin
+                          }
+
+                        }else{
+                          //la session no existe
+                          define('SESSION_STATUS', false);
+                          define('IS_ADMIN', false); //no es admin
+                        }
+
+
+
+              }else{ //el hash_secundary no es valido, los datos id_session:hash_primary fueron alterados
+                define('SESSION_STATUS', false);
+                define('IS_ADMIN', false); //no es admin
+              }
+            }else{ //el auth no se dividio en 3, no es valido
+              define('SESSION_STATUS', false);
+              define('IS_ADMIN', false); //no es admin
+            }
+
+       }else{ //el auth no existe
+         define('SESSION_STATUS', false);
+         define('IS_ADMIN', false); //no es admin
+       }
+
+
+      //ya se ha hecho el proceso de revision, ahora se respondera segun el callback
+
+
+
+}//fin de checkSession
