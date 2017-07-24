@@ -124,8 +124,8 @@ function checkSession($callback, $varify_admin){
        //obtener el auth
        if($_COOKIE['auth']){
          $auth_token = $_COOKIE['auth']; //obtener el auth de las cookies
-       }else if($_POST['auth']){
-         $auth_token = $_POST['auth']; //obtener el auth de variable POST
+       }else if($_GET['auth']){
+         $auth_token = $_GET['auth']; //obtener el auth de variable POST
        }else{
          $auth_token=false; //el auth no existe
        }
