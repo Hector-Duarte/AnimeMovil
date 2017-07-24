@@ -160,7 +160,7 @@ function checkSession($callback, $varify_admin){
                         //verificar si la consulta retorno usuario
                         if( $stmt->fetch() ){
                           //la session se ha encontrado, proceder a validar
-                          if($token === $auth_token[1] and $ip === getUserIp() and $expire > time() ){ //se valida todos los datos para autorizar session
+                          if($token == $auth_token[1] and $ip == getUserIp() and $expire > time() ){ //se valida todos los datos para autorizar session
                                   //la session es valida :D
                                   define('SESSION_STATUS', true); //definir session como valida como cierta
 
@@ -227,7 +227,7 @@ function checkSession($callback, $varify_admin){
       if(SESSION_STATUS == false){ //no existe session valida.
         switch ($callback) {
           case 'API':
-            error('No tienes permisos para esto.', 403);
+            error('La session no es valida.', 403);
             break;
 
           case 'PAGUE':
