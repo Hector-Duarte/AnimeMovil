@@ -276,7 +276,41 @@ function checkSession($callback, $varify_admin){
 
 
       //ya se ha hecho el proceso de revision, ahora se respondera segun el callback
+      if($varify_admin == true and IS_ADMIN == false){ //se solicito que fuera admin, pero IS_ADMIN es false
+        switch ($callback) {
+          case 'API':
+            error('No tienes permisos para esto.', 403);
+            break;
 
+          case 'PAGUE':
+             header('Location: /entrar'); //redirrecionar al login
+             exit();
+            break;
+
+          default:
+            error('El callback no es valido.', 500);
+            break;
+        }//fin de switch
+
+      }
+
+      if(SESSION_STATUS == false){ //no existe session valida.
+        switch ($callback) {
+          case 'API':
+            error('No tienes permisos para esto.', 403);
+            break;
+
+          case 'PAGUE':
+             header('Location: /entrar'); //redirrecionar al login
+             exit();
+            break;
+
+          default:
+            error('El callback no es valido.', 500);
+            break;
+        }//fin de switch
+
+      }
 
 
 }//fin de checkSession
