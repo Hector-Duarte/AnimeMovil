@@ -135,7 +135,7 @@ function checkSession($callback, $varify_admin){
        if($auth_token){
          //el token existe, validar los hash para posteriormente abrir la conexión sql
          $auth_token = explode(':', $auth_token);
-         echo json_encode($auth_token);
+
             if( count($auth_token) == 3 ){ //tienen que ser 3 para que se proceda a la validación de hashs
               //se retornaron 3 divisiones en total (id_session:hash_primary:hash_secundary)
 
@@ -161,10 +161,8 @@ function checkSession($callback, $varify_admin){
                         //verificar si la consulta retorno usuario
                         if( $stmt->fetch() ){
                           //la session se ha encontrado, proceder a validar
-                          echo "$token|$auth_token[1]|$ip|$expire|".time();
                           if($token == $auth_token[1] and $ip == getUserIp() and $expire > time() ){ //se valida todos los datos para autorizar session
                                   //la session es valida :D
-                                  echo 1111111111;
                                   define('SESSION_STATUS', true); //definir session como valida como cierta
 
                                     //validar si es usuario normal | 0 es admin y 1 es usuario normal
