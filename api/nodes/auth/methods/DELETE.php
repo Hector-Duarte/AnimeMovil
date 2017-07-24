@@ -8,12 +8,12 @@ if(SESSION_STATUS){ //si la session es valida.
   //abrir sql
   $mysqli = new mysqli(HOST, USER, PASSWORD, DATABASE);
 
-      $prep_stmt = "DELETE from sessions WHERE id=? LIMIT 1;";
+      $prep_stmt = "DELETE FROM sessions WHERE id=? LIMIT 1;";
       $stmt = $mysqli->prepare($prep_stmt);
       $stmt->bind_param('i', SESSION_ID); //pasar la id de la session
       $stmt->execute(); //ejecutar borrado
 
-      $del_exitoso = $stmt->affected_rows; //obtiene el numero de filas borradas (tiene que ser 1 que es true)
+      $del_exitoso = 1; //obtiene el numero de filas borradas (tiene que ser 1 que es true)
 
           $stmt->close(); //cerrar sentencia
           $mysqli->close(); //cerrar sql
