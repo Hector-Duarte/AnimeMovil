@@ -160,8 +160,10 @@ function checkSession($callback, $varify_admin){
                         //verificar si la consulta retorno usuario
                         if( $stmt->fetch() ){
                           //la session se ha encontrado, proceder a validar
+                          echo "$token|$auth_token[1]|$ip|$expire|".time();
                           if($token == $auth_token[1] and $ip == getUserIp() and $expire > time() ){ //se valida todos los datos para autorizar session
                                   //la session es valida :D
+                                  echo 1111111111;
                                   define('SESSION_STATUS', true); //definir session como valida como cierta
 
                                     //validar si es usuario normal | 0 es admin y 1 es usuario normal
