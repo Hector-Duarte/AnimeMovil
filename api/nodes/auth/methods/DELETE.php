@@ -1,7 +1,7 @@
 <?php
 
 //validar session
-checkSession('API', false); //'API' es el tipo de callback y el false es que no es necesario que sea admin
+checkSession('API', false);  //'API' es el tipo de callback y el false es que no es necesario que sea admin
 
 
 if(SESSION_STATUS){ //si la session es valida.
@@ -10,10 +10,11 @@ if(SESSION_STATUS){ //si la session es valida.
 
       $prep_stmt = "DELETE FROM sessions WHERE id=? LIMIT 1;";
       $stmt = $mysqli->prepare($prep_stmt);
-      $stmt->bind_param('i', SESSION_ID); //pasar la id de la session
+      $session_id = SESSION_ID; //session de id
+      $stmt->bind_param('i', $session_id); //pasar la id de la session
       $stmt->execute(); //ejecutar borrado
 
-      $del_exitoso = 1; //obtiene el numero de filas borradas (tiene que ser 1 que es true)
+      $del_exitoso = $stmt->affected_rows; //obtiene el numero de filas borradas (tiene que ser 1 que es true)
 
           $stmt->close(); //cerrar sentencia
           $mysqli->close(); //cerrar sql
