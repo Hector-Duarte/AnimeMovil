@@ -22,6 +22,9 @@ function createSession($usuario, $password){
 
           //verificar si la consulta retorno usuario
           if( !$stmt->fetch() ){
+            //no hay resultados, se cerrar toda conexión con la sql ya que terminara el proceso con un error
+            $stmt->close(); //cerrar sentencia
+            $mysqli->close(); //cerrar sql
             error('No existe el usuario, verifica tu información.', 403); //el usuario no es existe
           }
 
@@ -60,13 +63,15 @@ function createSession($usuario, $password){
 
          $hash_check = generateHash($session_id.$token_access); //hash_secundary
 
+         /* termino el proceso, cerrar conexion */
+         $stmt->close(); //cerrar sentencia
+         $mysqli->close(); //cerrar sql
 
          respuesta_ok( array( "auth" => urlencode("$session_id:$token_access:$hash_check"), "expire" => $token_expire, "expire_in" => 1296000  ) , 201); //retornar la id generada y terminar function
 
        } //fin de else
 
-       /* cerrar conexion */
-       $mysqli->close();
+
 } //fin de createSession
 
 
