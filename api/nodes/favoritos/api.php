@@ -1,7 +1,7 @@
 <?php
 
 //validar sesion
-validateSession();
+checkSession('API', false); //'API' es el tipo de callback y el false es que no es necesario que sea admin
 
 
 switch ($_SERVER["REQUEST_METHOD"]) {
