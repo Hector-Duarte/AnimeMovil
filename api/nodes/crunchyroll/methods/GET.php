@@ -2,6 +2,10 @@
 
 //abrir SQL
 $mysqli = new mysqli(HOST, USER, PASSWORD, DATABASE);
+if($mysqli->connect_errno){ //Fallo la conexión a SQL
+    error("No se ha podido conectar con la base de datos.", 500);
+}
+
 
 //function para obtener todas las ids disponibles
 if($_GET['value'] == 'pending'){

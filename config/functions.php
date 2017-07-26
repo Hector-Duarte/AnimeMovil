@@ -147,6 +147,9 @@ function checkSession($callback, $varify_admin){
 
                 //abrir sql
                 $mysqli = new mysqli(HOST, USER, PASSWORD, DATABASE);
+                if($mysqli->connect_errno){ //Fallo la conexión a SQL
+                    error("No se ha podido conectar con la base de datos.", 500);
+                }
 
                     $prep_stmt = "SELECT user_id, user_level, ip, token, expire, id from sessions WHERE id=? LIMIT 1;";
                     $stmt = $mysqli->prepare($prep_stmt);

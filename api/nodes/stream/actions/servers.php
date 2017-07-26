@@ -2,6 +2,10 @@
 
 //abrir SQL
 $mysqli = new mysqli(HOST, USER, PASSWORD, DATABASE);
+if($mysqli->connect_errno){ //Fallo la conexión a SQL
+    error("No se ha podido conectar con la base de datos.", 500);
+}
+
 
 //node
 $node = $_GET['value'];
@@ -48,7 +52,7 @@ switch ($_SERVER["REQUEST_METHOD"]) {
                $prep_stmt = "UPDATE stream SET $node = ? WHERE id = ? LIMIT 1;";
                $stmt = $mysqli->prepare($prep_stmt);
                $stmt->bind_param('si', $input->value, $input->id);
-            
+
                              if( $stmt->execute() ){
                                  //hay ID pendiente
                                 respuesta_ok( array('update' => true, 'value' => $input->value ), 200);

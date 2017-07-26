@@ -4,6 +4,10 @@
 
 //abrir SQL
 $mysqli = new mysqli(HOST, USER, PASSWORD, DATABASE);
+if($mysqli->connect_errno){ //Fallo la conexión a SQL
+    error("No se ha podido conectar con la base de datos.", 500);
+}
+
 
 //varificar que el ID enviado es numerico
 if( !is_numeric($_GET['value']) ){

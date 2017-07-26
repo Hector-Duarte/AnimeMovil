@@ -5,7 +5,9 @@
 
 //abrir SQL
 $mysqli = new mysqli(HOST, USER, PASSWORD, DATABASE);
-
+if($mysqli->connect_errno){ //Fallo la conexión a SQL
+    error("No se ha podido conectar con la base de datos.", 500);
+}
 
 //entrada de datos
 $input = json_decode(file_get_contents('php://input'));

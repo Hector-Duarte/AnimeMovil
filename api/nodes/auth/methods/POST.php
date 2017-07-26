@@ -9,6 +9,9 @@ function createSession($usuario, $password){
 
   //abrir sql
   $mysqli = new mysqli(HOST, USER, PASSWORD, DATABASE);
+  if($mysqli->connect_errno){ //Fallo la conexión a SQL
+      error("No se ha podido conectar con la base de datos.", 500);
+  }
 
       $prep_stmt = "SELECT password, salt, level, user, id from usuarios WHERE user=? LIMIT 1;";
       $stmt = $mysqli->prepare($prep_stmt);

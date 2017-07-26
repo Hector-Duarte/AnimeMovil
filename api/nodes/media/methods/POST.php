@@ -130,7 +130,9 @@ if($_FILES['imgCustom'] AND $_FILES['spriteImg'] AND $_FILES['spriteVtt'] AND is
 
                            //abrir SQL
                            $mysqli = new mysqli(HOST, USER, PASSWORD, DATABASE);
-
+													 if($mysqli->connect_errno){ //Fallo la conexión a SQL
+													     error("No se ha podido conectar con la base de datos.", 500);
+													 }
 
                                $prep_stmt = "UPDATE episodios SET imgCustom = 1 WHERE id = ? LIMIT 1;";
                                $stmt = $mysqli->prepare($prep_stmt);
@@ -138,7 +140,7 @@ if($_FILES['imgCustom'] AND $_FILES['spriteImg'] AND $_FILES['spriteVtt'] AND is
                                $stmt->bind_param('i', $_GET['value']);
 
                            if( $stmt->execute() ){
-	                           //Se creo  correctamente 
+	                           //Se creo  correctamente
                            	respuesta_ok( array("ok" => true ) ,201);
                            }else{
                            	//no se creo

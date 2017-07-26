@@ -7,12 +7,15 @@ checkSession('API', false);  //'API' es el tipo de callback y el false es que no
 if(SESSION_STATUS){ //si la session es valida.
   //abrir sql
   $mysqli = new mysqli(HOST, USER, PASSWORD, DATABASE);
+  if($mysqli->connect_errno){ //Fallo la conexión a SQL
+      error("No se ha podido conectar con la base de datos.", 500);
+  }
 
       $prep_stmt = "DELETE FROM sessions WHERE id=? LIMIT 1;";
       $stmt = $mysqli->prepare($prep_stmt);
 
       $session_id = SESSION_ID; //session de id
-      
+
       $stmt->bind_param('i', $session_id); //pasar la id de la session
       $stmt->execute(); //ejecutar borrado
 

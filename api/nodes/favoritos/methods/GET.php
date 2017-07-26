@@ -2,7 +2,9 @@
 
 //abrir SQL
 $mysqli = new mysqli(HOST, USER, PASSWORD, DATABASE);
-
+if($mysqli->connect_errno){ //Fallo la conexión a SQL
+    error("No se ha podido conectar con la base de datos.", 500);
+}
 
     $prep_stmt = "SELECT id, nodeId FROM favoritos WHERE id = ? AND nodeId = ?  LIMIT 1;"; //id es el usuarioId y nodeId es la id del anime.
     $stmt = $mysqli->prepare($prep_stmt);
