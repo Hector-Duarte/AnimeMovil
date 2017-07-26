@@ -240,8 +240,10 @@ function checkSession($callback, $varify_admin){
             break;
 
           case 'PAGUE':
+          /* No se detiene ya que puede estar viendo un anime. simplemente no se cargaran las funciones para usuarios.
              header('Location: /entrar'); //redirrecionar al login
              exit();
+             */
             break;
 
           default:
