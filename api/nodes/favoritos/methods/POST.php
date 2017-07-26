@@ -22,8 +22,8 @@ $mysqli = new mysqli(HOST, USER, PASSWORD, DATABASE);
 
 if( $insert_exitoso ){
 
-   respuesta_ok( array( "available" => true ), 201);
+   respuesta_ok( array( "available" => true, "message" => "Agregado con exito." ), 201);
 }else{
 
-   respuesta_ok( array( "available" => false ), 202);
+   respuesta_ok( array( "available" => false, "meesage" => "No se ha podido agregar." ), 202);
 }
