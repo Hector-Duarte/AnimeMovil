@@ -67,27 +67,27 @@ function getAnime(){
       if( !$_GET['q'] and !$_GET['offset'] ){
         //cuando no se realiza ni una busqueda ni se solicita un offset
 
-        $prep_stmt = "SELECT id, status, title, slug, simulcasts, sinopsis, emision, nextEpi, collection, message FROM animes LIMIT 10;"; //id es el del anime.
+        $prep_stmt = "SELECT id, status, title, slug, simulcasts, sinopsis, emision, nextEpi, collection, message FROM animes ORDER BY id DESC LIMIT 10;"; //id es el del anime.
         $stmt = $mysqli->prepare($prep_stmt);
 
       }else if( !$_GET['q'] and $_GET['offset'] and is_numeric($_GET['offset']) ){
         //cuando no se busca pero se solicita un offset
 
-        $prep_stmt = "SELECT id, status, title, slug, simulcasts, sinopsis, emision, nextEpi, collection, message FROM animes LIMIT 10 OFFSET ?;"; //id es el del anime.
+        $prep_stmt = "SELECT id, status, title, slug, simulcasts, sinopsis, emision, nextEpi, collection, message FROM animes ORDER BY id DESC LIMIT 10 OFFSET ?;"; //id es el del anime.
         $stmt = $mysqli->prepare($prep_stmt);
            $offset = $_GET['offset'] * 10; //los offset se multiplican x10
            $stmt->bind_param('i', $offset);
 
       }else if( $_GET['q'] and !$_GET['offset'] ){
         //cuando se busca pero no se pasa offset
-        $prep_stmt = "SELECT id, status, title, slug, simulcasts, sinopsis, emision, nextEpi, collection, message FROM animes WHERE title like ? LIMIT 10;"; //id es el del anime.
+        $prep_stmt = "SELECT id, status, title, slug, simulcasts, sinopsis, emision, nextEpi, collection, message FROM animes WHERE title like ? ORDER BY id DESC LIMIT 10;"; //id es el del anime.
         $stmt = $mysqli->prepare($prep_stmt);
            $search_like = '%'.$_GET['q'].'%'; //parametro a buscar
            $stmt->bind_param('s', $search_like);
 
       }else if( $_GET['q'] and $_GET['offset'] and is_numeric($_GET['offset']) ){
         //cuando se busca y se pasa un offset
-        $prep_stmt = "SELECT id, status, title, slug, simulcasts, sinopsis, emision, nextEpi, collection, message FROM animes WHERE title like ? LIMIT 10 OFFSET ?;"; //id es el del anime.
+        $prep_stmt = "SELECT id, status, title, slug, simulcasts, sinopsis, emision, nextEpi, collection, message FROM animes WHERE title like ? ORDER BY id DESC LIMIT 10 OFFSET ?;"; //id es el del anime.
         $stmt = $mysqli->prepare($prep_stmt);
            $search_like = '%'.$_GET['q'].'%'; //parametro a buscar
            $offset = $_GET['offset'] * 10; //los offset se multiplican x10
@@ -125,10 +125,12 @@ function getAnime(){
                                        );
       }
 
+
+            $stmt->close(); //cerrar sentencia
+            $mysqli->close(); //cerrar sql
+
       respuesta_ok( array( "items" => $items, "count" => count($items) ) , 200);
 
-      $stmt->close(); //cerrar sentencia
-      $mysqli->close(); //cerrar sql
 
 
 }//fin de getAnime
