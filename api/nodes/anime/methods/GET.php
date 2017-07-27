@@ -62,11 +62,6 @@ function getAnime(){
   }
 
 
-  //evaluar id para ver si es valida para consultar.
-  $anime_id = $_GET["value"]; //id del anime.
-  if( !is_numeric($anime_id) ){
-    error('Ingrese un id valido.', 400);
-  }
 
       //armar la consulta segun las condiciones
       if( !$_GET['q'] and !$_GET['offset'] ){
