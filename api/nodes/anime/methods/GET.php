@@ -14,7 +14,7 @@ if( !is_numeric($anime_id) ){
   error('Ingrese un id valido.', 400);
 }
 
-    $prep_stmt = "SELECT id, status, title, slug, simulcasts, sinopsis, emision, nextEpi, collection, message FROM animes WHERE id = ?LIMIT 1;"; //id es el del anime.
+    $prep_stmt = "SELECT id, status, title, slug, simulcasts, sinopsis, emision, nextEpi, collection, message FROM animes WHERE id = ? LIMIT 1;"; //id es el del anime.
     $stmt = $mysqli->prepare($prep_stmt);
 
     $stmt->bind_param('i', $anime_id);
