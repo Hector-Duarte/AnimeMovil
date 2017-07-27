@@ -32,7 +32,7 @@ if( !is_numeric($anime_id) ){
 
     if( $respuesta_exitosa ){
       //hay anime encontrador, imprimir
-      respuesta_ok( array( "items" => array(
+      respuesta_ok( array( "items" => array( 0 => array(
                                        "id" => $id,
                                        "status" => $status,
                                        "title" => $title,
@@ -43,7 +43,7 @@ if( !is_numeric($anime_id) ){
                                        "nextEpi" => $nextEpi,
                                        "collection" => $collection,
                                        "message" => $message
-                          ) ) , 200);
+                          ) ) ) , 200);
     }else{
       //no hay respuesta, retornar un error 404
       error('No se ha encontrado el anime', 404);
