@@ -148,6 +148,9 @@ $opts = array(
 $context = stream_context_create($opts);
 
 file_get_contents($_blobUrl, false, $context); //enviar imagen a azure
+
+echo json_encode($http_response_header);
+
 imagedestroy($lienzo);imagedestroy($lienzo_temporal); //destruir datos temporales.
 
 if( strpos($http_response_header[0], '201') ){ //comprueba que el elemento se creo
