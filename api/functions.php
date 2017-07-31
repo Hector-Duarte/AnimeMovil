@@ -117,8 +117,11 @@ $lienzo_temporal = imagecreatetruecolor( $miniatura_ancho, $miniatura_alto );
 //Creamos la imagen
 imagecopyresampled($lienzo_temporal, $imagen, 0, 0, 0, 0, $miniatura_ancho, $miniatura_alto, $imagen_ancho, $imagen_alto);
 imagecopy($lienzo, $lienzo_temporal, 0,0, $x, $y, $miniatura_ancho_maximo, $miniatura_alto_maximo);
-//$imagen_data = imagejpeg($lienzo, NULL, $i['calidad']); //asignarar imagen a variable.
 
+ob_start(); // start a new output buffer
+imagejpeg($lienzo, NULL, $i['calidad']); //asignarar imagen a variable.
+$imagen_data = ob_get_contents();
+ob_end_clean(); // stop this output buffer
 
 //preparar acceso a azure
 $account_name="ammedia"; //cuenta
@@ -132,7 +135,7 @@ $_blobUrl = getBlobUrl($account_name,$container_name,$blob_name,'b','w',$end_dat
 
 
 //size de la imagen
-$imagen_size = strlen($lienzo);
+$imagen_size = strlen($imagen_data);
 echo $imagen_size;exit();
 //cargar imagen a azure
 //cache al cdn de un año y cache al usuario de 7 dias
