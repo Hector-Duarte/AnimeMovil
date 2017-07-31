@@ -107,14 +107,14 @@ function miniaturas($i) {
   		break;
   }
 
+
+ob_start(); // start a new output buffer
   $lienzo = imagecreatetruecolor( $miniatura_ancho_maximo, $miniatura_alto_maximo );
   $lienzo_temporal = imagecreatetruecolor( $miniatura_ancho, $miniatura_alto );
   //Creamos la imagen
   imagecopyresampled($lienzo_temporal, $imagen, 0, 0, 0, 0, $miniatura_ancho, $miniatura_alto, $imagen_ancho, $imagen_alto);
   imagecopy($lienzo, $lienzo_temporal, 0,0, $x, $y, $miniatura_ancho_maximo, $miniatura_alto_maximo);
 
-
-ob_start(); // start a new output buffer
 imagejpeg($lienzo, NULL, $i['calidad']);
 $imagen_data = ob_get_contents();
 ob_end_clean(); // stop this output buffer
