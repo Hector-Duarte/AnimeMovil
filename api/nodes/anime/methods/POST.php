@@ -5,7 +5,7 @@ checkSession('API', true); //'API' es el tipo de callback y el true es que tiene
 
 
 $datos  = array(
-'original' => $_FILES['imgPortada']['tmp_name'],
+'original' => $_FILES['img']['tmp_name'],
 'contenedor' => 'animes',
 'blob' => 'blob.jpg',
 'resolucion' => array(90,90),
