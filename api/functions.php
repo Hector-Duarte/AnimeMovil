@@ -132,8 +132,7 @@ $_blobUrl = getBlobUrl($account_name,$container_name,$blob_name,'b','w',$end_dat
 
 
 //size de la imagen
-$imagen_size = mb_strlen($imagen_data);
-echo $imagen_size;exit();
+header('content-type: image/jpg');exit();
 //cargar imagen a azure
 //cache al cdn de un año y cache al usuario de 7 dias
 $opts = array(
@@ -142,7 +141,7 @@ $opts = array(
     'header'=>"x-ms-blob-type:BlockBlob\r\n".
               "Content-Type:image/jpg\r\n".
               "x-ms-blob-cache-control:s-maxage=31536000, max-age=604800\r\n".
-              "Content-Length:$imagen_size\r\n",
+              "Content-Length:\r\n",
 'content' => $imagen_data
    )
 );
