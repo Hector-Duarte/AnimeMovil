@@ -59,12 +59,12 @@ function getBlobUrl($accountName,$container,$blob,$resourceType,$permissions,$ex
 
 
 //funcion IMG
-function miniaturas($i) {
+function miniaturas($a = false) {
 //datos por defecto
+$i = array('original' => false, 'nuevo' => false, 'resolucion' => false, 'calidad' => 90);
 
-if(!$i){
-  error('La función para convertir imagenes requiere valores.', 500);
-}
+if ($a) {$i = array_replace($i, $a);}
+
 
 if($i['resolucion'] == 'original') {
 $dat = getimagesize($i['original']);
