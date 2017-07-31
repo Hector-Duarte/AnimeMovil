@@ -73,7 +73,7 @@ function miniaturas($i) {
 
   $info_imagen = getimagesize($i['original']);
 
-  echo json_encode($info_imagen);exit();
+  echo json_encode($i);exit();
   $imagen_ancho = $info_imagen[0];
   $imagen_alto = $info_imagen[1];
   $imagen_tipo = $info_imagen['mime'];
