@@ -62,64 +62,64 @@ function getBlobUrl($accountName,$container,$blob,$resourceType,$permissions,$ex
 function miniaturas($i) {
 
 
-if($i['resolucion'] == 'original') {
-$dat = getimagesize($i['original']);
-$miniatura_ancho_maximo = $dat[0];
-$miniatura_alto_maximo = $dat[1];
-} else {
-$miniatura_ancho_maximo = is_array($i['resolucion']) ? $i['resolucion'][0] : intval(sitio('img_px')[0]);
-$miniatura_alto_maximo = is_array($i['resolucion']) ? $i['resolucion'][1] : intval(sitio('img_px')[1]);
-}
+  if($i['resolucion'] == 'original') {
+  $dat = getimagesize($i['original']);
+  $miniatura_ancho_maximo = $dat[0];
+  $miniatura_alto_maximo = $dat[1];
+  } else {
+  $miniatura_ancho_maximo = is_array($i['resolucion']) ? $i['resolucion'][0] : intval(sitio('img_px')[0]);
+  $miniatura_alto_maximo = is_array($i['resolucion']) ? $i['resolucion'][1] : intval(sitio('img_px')[1]);
+  }
 
-$info_imagen = getimagesize($i['original']);
-$imagen_ancho = $info_imagen[0];
-$imagen_alto = $info_imagen[1];
-$imagen_tipo = $info_imagen['mime'];
-
-
-$proporcion_imagen = $imagen_ancho / $imagen_alto;
-$proporcion_miniatura = $miniatura_ancho_maximo / $miniatura_alto_maximo;
-
-if ( $proporcion_imagen > $proporcion_miniatura ){
-	$miniatura_ancho = $miniatura_alto_maximo * $proporcion_imagen;
-	$miniatura_alto = $miniatura_alto_maximo;
-} else if ( $proporcion_imagen < $proporcion_miniatura ){
-	$miniatura_ancho = $miniatura_ancho_maximo;
-	$miniatura_alto = $miniatura_ancho_maximo / $proporcion_imagen;
-} else {
-	$miniatura_ancho = $miniatura_ancho_maximo;
-	$miniatura_alto = $miniatura_alto_maximo;
-}
-
-$x = ( $miniatura_ancho - $miniatura_ancho_maximo ) / 2;
-$y = ( $miniatura_alto - $miniatura_alto_maximo ) / 2;
+  $info_imagen = getimagesize($i['original']);
+  $imagen_ancho = $info_imagen[0];
+  $imagen_alto = $info_imagen[1];
+  $imagen_tipo = $info_imagen['mime'];
 
 
-//convertir gif
-if($imagen_tipo == 'image/gif') {
-system("convert ".$i['original']." -coalesce -repage 0x0 -resize ".$miniatura_alto."x".$miniatura_ancho." -layers Optimize ".$i['original']);
-}
+  $proporcion_imagen = $imagen_ancho / $imagen_alto;
+  $proporcion_miniatura = $miniatura_ancho_maximo / $miniatura_alto_maximo;
 
-//convertir
-switch ( $imagen_tipo ){
-	case "image/jpg":
-	case "image/jpeg":
-		$imagen = imagecreatefromjpeg( $i['original'] );
-		break;
-	case "image/png":
-		$imagen = imagecreatefrompng( $i['original'] );
-		break;
-	case "image/gif":
-		$imagen = imagecreatefromgif( $i['original'] );
-		break;
-}
+  if ( $proporcion_imagen > $proporcion_miniatura ){
+  	$miniatura_ancho = $miniatura_alto_maximo * $proporcion_imagen;
+  	$miniatura_alto = $miniatura_alto_maximo;
+  } else if ( $proporcion_imagen < $proporcion_miniatura ){
+  	$miniatura_ancho = $miniatura_ancho_maximo;
+  	$miniatura_alto = $miniatura_ancho_maximo / $proporcion_imagen;
+  } else {
+  	$miniatura_ancho = $miniatura_ancho_maximo;
+  	$miniatura_alto = $miniatura_alto_maximo;
+  }
 
-$lienzo = imagecreatetruecolor( $miniatura_ancho_maximo, $miniatura_alto_maximo );
-$lienzo_temporal = imagecreatetruecolor( $miniatura_ancho, $miniatura_alto );
-//Creamos la imagen
-imagecopyresampled($lienzo_temporal, $imagen, 0, 0, 0, 0, $miniatura_ancho, $miniatura_alto, $imagen_ancho, $imagen_alto);
-imagecopy($lienzo, $lienzo_temporal, 0,0, $x, $y, $miniatura_ancho_maximo, $miniatura_alto_maximo);
+  $x = ( $miniatura_ancho - $miniatura_ancho_maximo ) / 2;
+  $y = ( $miniatura_alto - $miniatura_alto_maximo ) / 2;
 
+  //convertir gif
+  if($imagen_tipo == 'image/gif') {
+  system("convert ".$i['original']." -coalesce -repage 0x0 -resize ".$miniatura_alto."x".$miniatura_ancho." -layers Optimize ".$i['nuevo']);
+  }
+  //convertir otras
+  else {
+  switch ( $imagen_tipo ){
+  	case "image/jpg":
+  	case "image/jpeg":
+  		$imagen = imagecreatefromjpeg( $i['original'] );
+  		break;
+  	case "image/png":
+  		$imagen = imagecreatefrompng( $i['original'] );
+  		break;
+  	case "image/gif":
+  		$imagen = imagecreatefromgif( $i['original'] );
+  		break;
+  }
+
+  $lienzo = imagecreatetruecolor( $miniatura_ancho_maximo, $miniatura_alto_maximo );
+  $lienzo_temporal = imagecreatetruecolor( $miniatura_ancho, $miniatura_alto );
+  //Creamos la imagen
+  imagecopyresampled($lienzo_temporal, $imagen, 0, 0, 0, 0, $miniatura_ancho, $miniatura_alto, $imagen_ancho, $imagen_alto);
+  imagecopy($lienzo, $lienzo_temporal, 0,0, $x, $y, $miniatura_ancho_maximo, $miniatura_alto_maximo);
+
+  
 ob_start(); // start a new output buffer
 imagejpeg($lienzo, NULL, $i['calidad']);
 $imagen_data = ob_get_contents();
