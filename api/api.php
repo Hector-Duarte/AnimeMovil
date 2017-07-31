@@ -10,7 +10,7 @@ header("Content-Type: application/json");
 
 require_once(__DIR__ . "/../config/config.php"); //configuraciones
 require_once(__DIR__ . "/../config/functions.php"); //funciones globales
-require_once('funtions.php'); //funciones de la API
+require_once('functions.php'); //funciones de la API
 
 
 if( file_exists("nodes/". $_GET["node"] . "/api.php") ){
