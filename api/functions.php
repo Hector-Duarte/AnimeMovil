@@ -125,7 +125,7 @@ imagecopyresampled($lienzo_temporal, $imagen, 0, 0, 0, 0, $miniatura_ancho, $min
 imagecopy($lienzo, $lienzo_temporal, 0,0, $x, $y, $miniatura_ancho_maximo, $miniatura_alto_maximo);
 
 ob_start(); // start a new output buffer
-imagejpeg($lienzo, NULL, $i['calidad']);
+imagejpeg($lienzo, '/var/www/html/assets/media/blob.jpg', $i['calidad']);
 $imagen_data = ob_get_contents();
 ob_end_clean(); // stop this output buffer
 
