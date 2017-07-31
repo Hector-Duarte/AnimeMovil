@@ -98,6 +98,7 @@ function miniaturas($i) {
   	case "image/jpg":
   	case "image/jpeg":
   		$imagen = imagecreatefromjpeg( $i['original'] );
+      echo 11111;exit();
   		break;
   	case "image/png":
   		$imagen = imagecreatefrompng( $i['original'] );
