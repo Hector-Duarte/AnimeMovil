@@ -117,7 +117,7 @@ switch ( $imagen_tipo ){
 		$imagen = imagecreatefromgif( $i['original'] );
 		break;
 }
-
+}
 $lienzo = imagecreatetruecolor( $miniatura_ancho_maximo, $miniatura_alto_maximo );
 $lienzo_temporal = imagecreatetruecolor( $miniatura_ancho, $miniatura_alto );
 //Creamos la imagen
