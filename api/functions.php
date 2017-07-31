@@ -59,11 +59,7 @@ function getBlobUrl($accountName,$container,$blob,$resourceType,$permissions,$ex
 
 
 //funcion IMG
-function miniaturas($a = false) {
-//datos por defecto
-$i = array('original' => false, 'nuevo' => false, 'resolucion' => false, 'calidad' => 90);
-
-if ($a) {$i = array_replace($i, $a);}
+function miniaturas($i) {
 
 
 if($i['resolucion'] == 'original') {
@@ -125,7 +121,7 @@ imagecopyresampled($lienzo_temporal, $imagen, 0, 0, 0, 0, $miniatura_ancho, $min
 imagecopy($lienzo, $lienzo_temporal, 0,0, $x, $y, $miniatura_ancho_maximo, $miniatura_alto_maximo);
 
 ob_start(); // start a new output buffer
-imagejpeg($lienzo, '/var/www/html/assets/media/blob.jpg', $i['calidad']);
+imagejpeg($lienzo, NULL, $i['calidad']);
 $imagen_data = ob_get_contents();
 ob_end_clean(); // stop this output buffer
 
