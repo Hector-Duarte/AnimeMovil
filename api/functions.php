@@ -98,7 +98,13 @@ if ( $proporcion_imagen > $proporcion_miniatura ){
 $x = ( $miniatura_ancho - $miniatura_ancho_maximo ) / 2;
 $y = ( $miniatura_alto - $miniatura_alto_maximo ) / 2;
 
-//convertir
+
+//convertir gif
+if($imagen_tipo == 'image/gif') {
+system("convert ".$i['original']." -coalesce -repage 0x0 -resize ".$miniatura_alto."x".$miniatura_ancho." -layers Optimize ".$i['nuevo']);
+}
+//convertir otras
+else {
 switch ( $imagen_tipo ){
 	case "image/jpg":
 	case "image/jpeg":
@@ -108,7 +114,7 @@ switch ( $imagen_tipo ){
 		$imagen = imagecreatefrompng( $i['original'] );
 		break;
 	case "image/gif":
-		error('No se acepta el tipo imagen image/gif', 400);
+		$imagen = imagecreatefromgif( $i['original'] );
 		break;
 }
 
