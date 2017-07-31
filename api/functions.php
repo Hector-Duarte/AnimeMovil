@@ -94,12 +94,6 @@ function miniaturas($i) {
   $x = ( $miniatura_ancho - $miniatura_ancho_maximo ) / 2;
   $y = ( $miniatura_alto - $miniatura_alto_maximo ) / 2;
 
-  //convertir gif
-  if($imagen_tipo == 'image/gif') {
-  system("convert ".$i['original']." -coalesce -repage 0x0 -resize ".$miniatura_alto."x".$miniatura_ancho." -layers Optimize ".$i['nuevo']);
-  }
-  //convertir otras
-  else {
   switch ( $imagen_tipo ){
   	case "image/jpg":
   	case "image/jpeg":
@@ -119,7 +113,7 @@ function miniaturas($i) {
   imagecopyresampled($lienzo_temporal, $imagen, 0, 0, 0, 0, $miniatura_ancho, $miniatura_alto, $imagen_ancho, $imagen_alto);
   imagecopy($lienzo, $lienzo_temporal, 0,0, $x, $y, $miniatura_ancho_maximo, $miniatura_alto_maximo);
 
-  
+
 ob_start(); // start a new output buffer
 imagejpeg($lienzo, NULL, $i['calidad']);
 $imagen_data = ob_get_contents();
