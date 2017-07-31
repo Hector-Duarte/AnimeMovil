@@ -136,7 +136,8 @@ $_blobUrl = getBlobUrl($account_name,$container_name,$blob_name,'b','w',$end_dat
 
 //size de la imagen
 $imagen_size = strlen($imagen_data);
-echo $imagen_size;exit();
+
+
 //cargar imagen a azure
 //cache al cdn de un año y cache al usuario de 7 dias
 $opts = array(
