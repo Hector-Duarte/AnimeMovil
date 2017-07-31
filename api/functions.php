@@ -105,7 +105,7 @@ function miniaturas($i) {
   		$imagen = imagecreatefrompng( $i['original'] );
   		break;
   	case "image/gif":
-  		$imagen = imagecreatefromgif( $i['original'] );
+  		error('No se permite imagenes tipo gif', 400);
   		break;
   }
 
