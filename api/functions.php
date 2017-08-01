@@ -152,7 +152,7 @@ $opts = array(
   'http'=>array(
     'method'=>"PUT",
     'header'=>"x-ms-blob-type:BlockBlob\r\n".
-              "Content-Type:image/jpg\r\n".
+              "Content-Type:$imagen_tipo\r\n".
               "x-ms-blob-cache-control:s-maxage=31536000, max-age=604800\r\n".
               "Content-Length:$imagen_size\r\n",
 'content' => $imagen_data
