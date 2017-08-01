@@ -92,8 +92,8 @@ function delete_azure($contenedor, $blob){
   $end_date=gmdate("Y-m-d\TH:i:s\Z", time()+60); //expiracion
   $api_key="wxtwiD8SAKd9CGJqN2OM4Pa1ADeyMZHe1io85/fg0njn28Gy67JLbDLU496nWEfyeAxqr16v449R8pdC9QbJaQ=="; //key api
 
-  $_signature = getSASForBlob($account_name,$container_name,$blob_name,'b','d',$end_date,$api_key);
-  $_blobUrl = getBlobUrl($account_name,$container_name,$blob_name,'b','d',$end_date,$_signature);
+  $_signature = getSASForBlob($account_name,$container_name,$blob_name,'b','wd',$end_date,$api_key);
+  $_blobUrl = getBlobUrl($account_name,$container_name,$blob_name,'b','wd',$end_date,$_signature);
 
 
   //cargar imagen a azure
