@@ -3,11 +3,21 @@
 /*** functions de la API. ***/
 
 
+//preparar slug
+function slug_generate($text){
+    $text= strtolower($text);
+    $text= html_entity_decode($text);
+    $text= str_replace(array('ä','ü','ö','ß','ñ','á','é','í','ó','ú'),array('a','u','o','b','n','a','e','i','o','u'),$text);
+    $text= preg_replace('#[^\w\säüöß]#',null,$text);
+    $text= preg_replace('#[\s]{2,}#',' ',$text);
+    $text= str_replace(array(' '),array('-'),$text);
+    return $text;
+}
+
+
 
 //preparar firma para acceder a azure
-
-function getSASForBlob($accountName,$container, $blob, $resourceType, $permissions, $expiry,$key)
- {
+function getSASForBlob($accountName,$container, $blob, $resourceType, $permissions, $expiry,$key){
 
  /* Create the signature */
  $_arraysign = array();
