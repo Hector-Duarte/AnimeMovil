@@ -107,7 +107,7 @@ function delete_azure($contenedor, $blob){
   $context = stream_context_create($opts);
 
   file_get_contents($_blobUrl, false, $context); //borrar de azure.
-
+echo $_blobUrl.'\n';
 echo json_encode($http_response_header);
 
 }//fin de delete_azure
