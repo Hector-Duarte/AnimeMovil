@@ -47,6 +47,7 @@ if( !$anime_id_new_create ){//si el ID no es valido
 /*
 resoluciones:
                 IMG_portada => 240 x 360
+                IMG_portada => 170 x 250
                 IMG_portada => 90 x 90
                 IMG_wallpaper => 1280 x 720
                 IMG_wallpaper => 848 x 480
@@ -59,17 +60,28 @@ resoluciones:
      $datos  = array(
         'original' => $_FILES['IMG_portada']['tmp_name'],
         'contenedor' => 'animes',
-        'blob' => "$anime_id_new_create/banner.jpg",
+        'blob' => "$anime_id_new_create/banner_full.jpg",
         'resolucion' => array(240,360),
         'calidad' => 100
      );
      miniaturas($datos);
 
-     //miniatura 90x90
+     //portada 170 x 250
      $datos  = array(
         'original' => $_FILES['IMG_portada']['tmp_name'],
         'contenedor' => 'animes',
         'blob' => "$anime_id_new_create/banner_small.jpg",
+        'resolucion' => array(170,250),
+        'calidad' => 100
+     );
+     miniaturas($datos);
+
+
+     //miniatura 90x90
+     $datos  = array(
+        'original' => $_FILES['IMG_portada']['tmp_name'],
+        'contenedor' => 'animes',
+        'blob' => "$anime_id_new_create/miniature.jpg",
         'resolucion' => array(90,90),
         'calidad' => 100
      );
