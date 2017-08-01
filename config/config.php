@@ -1,10 +1,12 @@
 <?php
 
 /* ajustes para todo el sitio  basicos */
+define('HTTP_PROTOCOL', 'http');
 define('SITE_NAME','Anime Móvil'); //nombre del sitio web
 define('STREAM_PATH','/stream/'); //path del stream
 define('API_PATH', '/api/'); //api path
-
+define('DOMAIN', 'animemovil.com');
+define('STATIC_DOMAIN', 'media.animemovil.com');
 
 //base de datos
 define("HOST", "localhost");     // El alojamiento al que deseas conectarte

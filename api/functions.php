@@ -14,6 +14,25 @@ function slug_generate($text){
     return $text;
 }
 
+//purgar -  Se encargara de purgar archivos.
+function purge($files){
+  //$files sera un array tipo lista ["file1","file2","file3"]
+  $cf_body = json_encode( array( "files" => $files ) );
+  $opts = array(
+    'http'=>array(
+      'method'=>"DELETE",
+      'header'=>"X-Auth-Email:hectordanielunsc@gmail.com\r\n".
+                "X-Auth-Key:502be93eb7d860c43894a02ded47c3a5aa235\r\n".
+                "Content-Type:application/json\r\n",
+  'content' => $cf_body
+     )
+  );
+
+  $context = stream_context_create($opts);
+
+  file_get_contents('https://api.cloudflare.com/client/v4/zones/b62360d2d9aa894308e3d5681956e188/purge_cache', false, $context); //enviar peticion a cloudflare
+
+}//fin de function purge.
 
 
 //preparar firma para acceder a azure
