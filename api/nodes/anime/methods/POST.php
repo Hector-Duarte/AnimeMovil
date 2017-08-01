@@ -259,7 +259,7 @@ if($mysqli->connect_errno){ //Fallo la conexión a SQL
 }
 
      //preparar insert
-     $prep_stmt = "UPDATE ANIMES SET status = ?, title = ?, slug = ?, simulcasts = ?, sinopsis = ?, emision = ?, nextEpi = ?, collection = ?, message = ? WHERE id = ? LIMIT 1;"; //id es el del anime.
+     $prep_stmt = "UPDATE animes SET status = ?, title = ?, slug = ?, simulcasts = ?, sinopsis = ?, emision = ?, nextEpi = ?, collection = ?, message = ? WHERE id = ? LIMIT 1;"; //id es el del anime.
      $stmt = $mysqli->prepare($prep_stmt);
 
      $anime_slug = slug_generate( $_POST['title'] ); //generar slug a partir del title.
