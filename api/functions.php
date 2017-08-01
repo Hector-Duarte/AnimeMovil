@@ -98,19 +98,17 @@ function delete_azure($contenedor, $blob){
 
   //cargar imagen a azure
   //cache al cdn de un año y cache al usuario de 7 dias
+  $opts = array(
+    'http'=>array(
+      'method'=>"DELETE"
+     )
+  );
 
+  $context = stream_context_create($opts, array ('protocol_version'=> '1.1') );
 
-  $request = new HttpRequest();
-  $request->setUrl($_blobUrl);
-  $request->setMethod(HTTP_METH_DELETE);
-
-  try {
-    $response = $request->send();
-
-    echo $response->getBody();
-  } catch (HttpException $ex) {
-    echo $ex;
-  }
+  file_get_contents($_blobUrl, false, $context); //borrar de azure.
+echo $_blobUrl.'\n';
+echo json_encode($http_response_header);
 
 }//fin de delete_azure
 
