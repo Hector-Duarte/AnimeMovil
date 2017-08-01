@@ -100,6 +100,7 @@ function delete_azure($contenedor, $blob){
   //cache al cdn de un año y cache al usuario de 7 dias
   $opts = array(
     'http'=>array(
+      'request_fulluri' => true,
       'method'=>"DELETE"
      )
   );
