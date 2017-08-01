@@ -100,11 +100,12 @@ function delete_azure($contenedor, $blob){
   //cache al cdn de un año y cache al usuario de 7 dias
   $opts = array(
     'http'=>array(
+      'protocol_version' => '1.1',
       'method'=>"DELETE"
      )
   );
 
-  $context = stream_context_create($opts, array ('protocol_version'=> '1.1') );
+  $context = stream_context_create($opts);
 
   file_get_contents($_blobUrl, false, $context); //borrar de azure.
 echo $_blobUrl.'\n';
