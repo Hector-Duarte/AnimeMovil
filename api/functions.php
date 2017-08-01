@@ -81,7 +81,35 @@ function getBlobUrl($accountName,$container,$blob,$resourceType,$permissions,$ex
  }
 
 
+//borrar imagenes de azure.
+function delete_azure($contenedor, $blob){
+  //$contenedor es el folder patre y $blob es el archivo.
 
+  //preparar acceso a azure
+  $account_name="ammedia"; //cuenta
+  $container_name=$contenedor; //contenedor
+  $blob_name=$blob; //blob
+  $end_date=gmdate("Y-m-d\TH:i:s\Z", time()+60); //expiracion
+  $api_key="wxtwiD8SAKd9CGJqN2OM4Pa1ADeyMZHe1io85/fg0njn28Gy67JLbDLU496nWEfyeAxqr16v449R8pdC9QbJaQ=="; //key api
+
+  $_signature = getSASForBlob($account_name,$container_name,$blob_name,'b','w',$end_date,$api_key);
+  $_blobUrl = getBlobUrl($account_name,$container_name,$blob_name,'b','w',$end_date,$_signature);
+
+
+  //cargar imagen a azure
+  //cache al cdn de un año y cache al usuario de 7 dias
+  $opts = array(
+    'http'=>array(
+      'method'=>"DELETE"
+     )
+  );
+
+  $context = stream_context_create($opts);
+
+  file_get_contents($_blobUrl, false, $context); //borrar de azure.
+
+
+}//fin de delete_azure
 
 
 
