@@ -103,7 +103,8 @@ function delete_azure($contenedor, $blob){
       'protocol_version' => 1.1,
       'method'=>"DELETE",
       'timeout' => 1,
-      'header' => 'Connection: close\r\n',
+      'header' => 'x-ms-blob-type:BlockBlob\r\n'.
+                  'Connection: close\r\n',
       'content' => ''
      )
   );
