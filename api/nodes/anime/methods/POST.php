@@ -275,7 +275,7 @@ $mysqli->close(); //cerrar sql
 if( $update_exitoso ){//el update fue correcto.
   respuesta_ok( array( 'message' => 'Se ha actualizado correctamente.' ) , 200);
 }else{
-      error('Ocurrio un error al actualizar el anime.', 400);
+      error('No se ha detectado algún cambio en la DB, si cargo imagenes nuevas nada más fue correcta la solicitud.', 202);
     }
 
 
