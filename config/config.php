@@ -1,5 +1,6 @@
 <?php
 
+// ES NECESARIO INSTALAR CURL
 /* ajustes para todo el sitio  basicos */
 define('HTTP_PROTOCOL', 'http');
 define('SITE_NAME','Anime Móvil'); //nombre del sitio web

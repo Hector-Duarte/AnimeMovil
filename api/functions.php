@@ -98,22 +98,14 @@ function delete_azure($contenedor, $blob){
 
   //cargar imagen a azure
   //cache al cdn de un año y cache al usuario de 7 dias
-  $opts = array(
-    'http'=>array(
-      'protocol_version' => 1.1,
-      'method'=>"DELETE",
-      'timeout' => 1,
-      'header' => 'x-ms-blob-type:BlockBlob\r\n'.
-                  'Connection: close\r\n',
-      'content' => ''
-     )
-  );
+  $ch = curl_init();
+      curl_setopt($ch, CURLOPT_URL,$_blobUrl);
+      curl_setopt($ch, CURLOPT_CUSTOMREQUEST, "DELETE");
+      $result = curl_exec($ch);
 
-  $context = stream_context_create($opts);
 
-  file_get_contents($_blobUrl, false, $context); //borrar de azure.
 echo $_blobUrl.'\n';
-echo json_encode($http_response_header);
+echo $result;
 
 }//fin de delete_azure
 
