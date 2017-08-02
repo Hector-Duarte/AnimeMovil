@@ -101,11 +101,8 @@ function delete_azure($contenedor, $blob){
   $ch = curl_init();
       curl_setopt($ch, CURLOPT_URL,$_blobUrl);
       curl_setopt($ch, CURLOPT_CUSTOMREQUEST, "DELETE");
+      curl_setopt($ch, CURLOPT_CONNECTTIMEOUT, 5);
       $result = curl_exec($ch);
-
-
-echo $_blobUrl.'\n';
-echo $result;
 
 }//fin de delete_azure
 
