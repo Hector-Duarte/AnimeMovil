@@ -102,6 +102,7 @@ function delete_azure($contenedor, $blob){
     'http'=>array(
       'protocol_version' => 1.1,
       'method'=>"DELETE",
+      'timeout' => 1,
       'header' => 'Connection: close\r\n'
      )
   );
