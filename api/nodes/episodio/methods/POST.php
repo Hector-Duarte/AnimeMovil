@@ -7,7 +7,7 @@ function createEpisodio(){//funcion para crear nuevos animes.
 
 
 //verificar que se mandaron todos los datos
-if( !isset($_POST['status'], $_POST['message'], $_POST['title'], $_POST['slug'], $_POST['parentId'], $_POST['numEpi'] ) ){
+if( !isset($_POST['status'], $_POST['message'], $_POST['title'], $_POST['parentId'], $_POST['numEpi'] ) ){
   error('Por favor ingrese todos los datos necesarios y vuelva a intentar.', 400);
 }
 
@@ -198,5 +198,5 @@ if( is_numeric($_GET['value']) ){
   updateAnime();
 }else{
   //no es numerico, entonces se esta agregando otro anime.
-  createAnime();
+  createEpisodio();
 }
