@@ -12,7 +12,7 @@ define('STATIC_DOMAIN', 'media.animemovil.com');
 //base de datos
 define("HOST", "localhost");     // El alojamiento al que deseas conectarte
 define("USER", "root");    // El nombre de usuario de la base de datos
-define("PASSWORD", "HUAWEIu8185");    // La contraseña de la base de datos
+define("PASSWORD", "7445018937");    // La contraseña de la base de datos
 define("DATABASE", "animemovil");    // El nombre de la base de datos
 
 //claves de acceso
