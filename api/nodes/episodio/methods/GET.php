@@ -49,8 +49,8 @@ if( !is_numeric($anime_id) ){
 
 }//fin de getAnimeById
 
-function getAnime(){
-  /* Esta función devolvera animes en lista.
+function getEpisodio(){
+  /* Esta función devolvera episodios en lista.
   solo se aceptaran dos parametros (offset y search) */
 
   //abrir SQL
@@ -65,27 +65,27 @@ function getAnime(){
       if( !$_GET['q'] and !$_GET['offset'] ){
         //cuando no se realiza ni una busqueda ni se solicita un offset
 
-        $prep_stmt = "SELECT id, status, title, slug, simulcasts, sinopsis, emision, nextEpi, collection, message FROM animes ORDER BY id DESC LIMIT 10;"; //id es el del anime.
+        $prep_stmt = "SELECT id, status, title, slug, numEpi, imgCustom, parentId, message FROM episodios ORDER BY id DESC LIMIT 10;"; //id es el del anime.
         $stmt = $mysqli->prepare($prep_stmt);
 
       }else if( !$_GET['q'] and $_GET['offset'] and is_numeric($_GET['offset']) ){
         //cuando no se busca pero se solicita un offset
 
-        $prep_stmt = "SELECT id, status, title, slug, simulcasts, sinopsis, emision, nextEpi, collection, message FROM animes ORDER BY id DESC LIMIT 10 OFFSET ?;"; //id es el del anime.
+        $prep_stmt = "SELECT id, status, title, slug, numEpi, imgCustom, parentId, message FROM episodios ORDER BY id DESC LIMIT 10 OFFSET ?;"; //id es el del anime.
         $stmt = $mysqli->prepare($prep_stmt);
            $offset = $_GET['offset'] * 10; //los offset se multiplican x10
            $stmt->bind_param('i', $offset);
 
       }else if( $_GET['q'] and !$_GET['offset'] ){
         //cuando se busca pero no se pasa offset
-        $prep_stmt = "SELECT id, status, title, slug, simulcasts, sinopsis, emision, nextEpi, collection, message FROM animes WHERE title like ? ORDER BY id DESC LIMIT 10;"; //id es el del anime.
+        $prep_stmt = "SELECT id, status, title, slug, numEpi, imgCustom, parentId, message FROM episodios WHERE title like ? ORDER BY id DESC LIMIT 10;"; //id es el del anime.
         $stmt = $mysqli->prepare($prep_stmt);
            $search_like = '%'.$_GET['q'].'%'; //parametro a buscar
            $stmt->bind_param('s', $search_like);
 
       }else if( $_GET['q'] and $_GET['offset'] and is_numeric($_GET['offset']) ){
         //cuando se busca y se pasa un offset
-        $prep_stmt = "SELECT id, status, title, slug, simulcasts, sinopsis, emision, nextEpi, collection, message FROM animes WHERE title like ? ORDER BY id DESC LIMIT 10 OFFSET ?;"; //id es el del anime.
+        $prep_stmt = "SELECT id, status, title, slug, numEpi, imgCustom, parentId, message FROM episodios WHERE title like ? ORDER BY id DESC LIMIT 10 OFFSET ?;"; //id es el del anime.
         $stmt = $mysqli->prepare($prep_stmt);
            $search_like = '%'.$_GET['q'].'%'; //parametro a buscar
            $offset = $_GET['offset'] * 10; //los offset se multiplican x10
@@ -101,7 +101,7 @@ function getAnime(){
       $stmt->store_result();
 
       //asignar valores recibidos
-      $stmt->bind_result($id, $status, $title, $slug, $simulcasts, $sinopsis, $emision, $nextEpi, $collection, $message);
+      $stmt->bind_result($id, $status, $title, $slug, $numEpi, $imgCustom, $parentId, $message);
 
       //array contenedor
       $items = array();
@@ -110,16 +110,14 @@ function getAnime(){
       while( $stmt->fetch() ){
         //obtener todos los resultados
                        $items[] =   array(
-                                         "id" => $id,
-                                         "status" => $status,
-                                         "title" => $title,
-                                         "slug" => $slug,
-                                         "simulcasts" => $simulcasts,
-                                         "sinopsis" => $sinopsis,
-                                         "emision" => $emision,
-                                         "nextEpi" => $nextEpi,
-                                         "collection" => $collection,
-                                         "message" => $message
+                         "id" => $id,
+                         "status" => $status,
+                         "title" => $title,
+                         "slug" => $slug,
+                         "numEpi" => $numEpi,
+                         "imgCustom" => $imgCustom,
+                         "parentId" => $parentId,
+                         "message" => $message
                                        );
       }
 
@@ -139,9 +137,9 @@ function getAnime(){
 /* RESPUESTAS SEGUN LA REQUEST  */
 
 if( is_numeric($_GET['value']) ){
-  //el valor es numerico, por lo que se buscara el anime.
+  //el valor es numerico, por lo que se buscara el episodio.
   getEpisodioById();
 }else{
   //no es numerico, se evaluara como tipo buscador (offset y search)
-  getAnime();
+  getEpisodio();
 }
