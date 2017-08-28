@@ -45,7 +45,7 @@ respuesta_ok( array( "id" => $episodio_id_new_create ) , 201);
 
 }//fin de createAnime.
 
-
+ 
 
 function updateAnime(){
 //se usara para actualizar la información del anime.
