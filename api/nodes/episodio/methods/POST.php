@@ -7,7 +7,7 @@ function createEpisodio(){//funcion para crear nuevos animes.
 
 
 //verificar que se mandaron todos los datos
-if( !isset($_POST['status'], $_POST['message'], $_POST['title'], $_POST['parentId'], $_POST['numEpi'] ) ){
+if( !isset($_POST['status'], $_POST['message'], $_POST['title'], $_POST['simulcasts'], $_POST['parentId'], $_POST['numEpi'] ) ){
   error('Por favor ingrese todos los datos necesarios y vuelva a intentar.', 400);
 }
 
@@ -21,12 +21,12 @@ if($mysqli->connect_errno){ //Fallo la conexión a SQL
 }
 
      //preparar insert
-     $prep_stmt = "INSERT INTO episodios(status, title, slug, numEpi, imgCustom, parentId, message) VALUES ( ?, ?, ?, ?, 0, ?, ?);"; //id es el del anime.
+     $prep_stmt = "INSERT INTO episodios(status, title, slug, numEpi, imgCustom, parentId, message, simulcasts) VALUES ( ?, ?, ?, ?, 0, ?, ?, ?);"; //id es el del anime.
      $stmt = $mysqli->prepare($prep_stmt);
 
      $episodio_slug = slug_generate( $_POST['title'] );
 
-     $stmt->bind_param('issiis', $_POST['status'], $_POST['title'], $episodio_slug, $_POST['numEpi'], $_POST['parentId'], $_POST['message']);
+     $stmt->bind_param('issiisi', $_POST['status'], $_POST['title'], $episodio_slug, $_POST['numEpi'], $_POST['parentId'], $_POST['message'], $_POST['simulcasts']);
      $stmt->execute(); //ejecutar consulta.
 
      $episodio_id_new_create = $stmt->insert_id; //ID del anime nuevo.
