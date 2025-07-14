@@ -44,5 +44,5 @@ RewriteRule registrar$ pagues/usuario-registrar.php
 
 
 #pagina de errores
-ErrorDocument 404 /errores/404.html
-ErrorDocument 403 /errores/403.html
+ErrorDocument 404 /AnimeMovil/errores/404.html
+ErrorDocument 403 /AnimeMovil/errores/403.html

@@ -1,7 +1,7 @@
 <?php
 
 //vars
-require_once("/var/www/html/vars_info.php");
+require_once("C:\\xampp\\htdocs\\AnimeMovil\\vars_info.php");
 
 
 $cachePath = CACHE_PATH . "episodio-" .$_GET['id']. "-info.json";
@@ -45,6 +45,7 @@ header("x-cache: MISS");
 
 
 $cache=new stdClass();
+$cache->episodio = new stdClass(); // Inicializar el objeto episodio
 
 //conectar a base de datos
 $mysqli = new mysqli(HOST, USER, PASSWORD, DATABASE);
@@ -69,7 +70,7 @@ $cache->episodio->title = $title;
 $cache->episodio->slug = $slug;
 $cache->episodio->numEpi = $numEpi;
 $cache->episodio->imgCustom = $imgCustom;
-$cache->episodio->imgSprite = $imgSprite;
+$cache->episodio->imgSprite = ""; // Inicializar por defecto
 $cache->episodio->message = $message;
 $cache->episodio->parentId = $parentId;
 $cache->episodio->animeSlug = $animeSlug;
@@ -131,7 +132,7 @@ $cache->episodio->anterior = $epiAnterior;
    //error 404
    if(!$id){ 
      http_response_code(404);
-     include("/var/www/html/errores/404.html");
+     include("../errores/404.html");
      exit(); 
 
       //cerrar sql
@@ -282,15 +283,16 @@ function validateSession(){
         <meta content='general' name='rating'/>
         <meta property="og:title" content="<?php echo $title; ?>"/>
         <meta property="og:type" content="video.episode"/>
-        <link rel="shortcut icon" href="/assets/webApp/favicon.png" type="image/png"/>
-        <link rel="stylesheet" type="text/css" href="/assets/webApp/app.css"/>
+        <link rel="shortcut icon" href="/AnimeMovil/assets/webApp/favicon.png" type="image/png"/>
+        <link rel="stylesheet" type="text/css" href="/AnimeMovil/assets/webApp/app.css"/>
+        <link rel="stylesheet" type="text/css" href="/AnimeMovil/assets/webApp/mejoras.css"/>
 
 <?php
 //img
 if($imgCustom == 1){
-$imgPath = "/assets/media/episodio-" . $id ."_grande.jpg";
+$imgPath = "/AnimeMovil/assets/media/episodio-" . $id ."_grande.jpg";
 }else{
-$imgPath = "/assets/media/anime-" . $parentId ."_grande.jpg";
+$imgPath = "/AnimeMovil/assets/media/anime-" . $parentId ."_grande.jpg";
 }
 
 ?>
@@ -345,7 +347,7 @@ $imgPath = "/assets/media/anime-" . $parentId ."_grande.jpg";
  <nav class="contentHeader">  
    <div class="cabecera">
 
-<div class="logo"><a href="/" title="Pagina principal"><img src="/assets/webApp/logo.png"/></a></div>
+<div class="logo"><a href="/AnimeMovil/" title="Pagina principal"><img src="/AnimeMovil/assets/webApp/logo.png"/></a></div>
 
 
 
@@ -767,10 +769,10 @@ if( $epiSiguiente ){
 
 
 
-<script src="/assets/webApp/jw7/jwplayer.js"></script>
-<script async src="/assets/webApp/app.js"></script>
+<script src="/AnimeMovil/assets/webApp/jw7/jwplayer.js"></script>
+<script async src="/AnimeMovil/assets/webApp/app.js"></script>
 
 
-<link href="/assets/webApp/icons/font-awesome.css" rel="stylesheet"/>
+<link href="/AnimeMovil/assets/webApp/icons/font-awesome.css" rel="stylesheet"/>
 </body>
 </html>

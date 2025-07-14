@@ -1,7 +1,7 @@
 <?php
 
 //variables basicas
-require_once("/var/www/html/vars_info.php");
+require_once("C:\\xampp\\htdocs\\AnimeMovil\\vars_info.php");
 
 
 
@@ -14,6 +14,15 @@ require_once("/var/www/html/vars_info.php");
 //Verificar session valida
 function validateSession(){
 
+   // Verificar si todas las cookies existen
+   if (!isset($_COOKIE["session_user_id"]) || 
+       !isset($_COOKIE["session_user_name"]) || 
+       !isset($_COOKIE["session_id"]) || 
+       !isset($_COOKIE["session_user_level"]) || 
+       !isset($_COOKIE["session_expire"]) || 
+       !isset($_COOKIE["session_hash"])) {
+       return false;
+   }
 
    $_arraysign = array();
    $_arraysign[] = $_COOKIE["session_user_id"]; //id del usuario
@@ -25,7 +34,8 @@ function validateSession(){
 
    $_str2sign = implode("\n", $_arraysign);
 
-   $session_hash = base64_encode( hash_hmac('sha256', urldecode(utf8_encode($_str2sign)), base64_decode($key), true) ); //hast token para verificar sesion
+   $key = SIGNATURE_HASH_USER; // Definir la variable $key
+   $session_hash = base64_encode( hash_hmac('sha256', urldecode(utf8_encode($_str2sign)), base64_decode($key), true) ); //hash token para verificar sesion
 
 
           if($session_hash === $_COOKIE["session_hash"] AND is_numeric($_COOKIE["session_expire"]) AND $_COOKIE["session_expire"] > time() ){
@@ -47,13 +57,14 @@ function validateSession(){
 <html lang="es">
 <head>
 	<title>Anime Móvil</title>
-        <link rel="shortcut icon" href="/assets/webApp/favicon.png" type="image/png"/>
+        <link rel="shortcut icon" href="/AnimeMovil/assets/webApp/favicon.png" type="image/png"/>
         <meta content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1" name="viewport"/>
         <meta charset="utf-8"/>
         <meta content="AnimeMovil" property="og:site_name"/>
         <meta name="keywords" content="Anime, anime online, anime sub español, anime en celular"/>
         <meta name="robots" content="noindex, nofollow"/>
-        <link rel="stylesheet" type="text/css" href="/assets/webApp/app.css"/>
+        <link rel="stylesheet" type="text/css" href="/AnimeMovil/assets/webApp/app.css"/>
+        <link rel="stylesheet" type="text/css" href="/AnimeMovil/assets/webApp/mejoras.css"/>
 
 
 
@@ -99,7 +110,7 @@ function validateSession(){
  <nav class="contentHeader">
    <div class="cabecera">
 
-<div class="logo"><a href="/" title="Pagina principal"><img src="/assets/webApp/logo.png"/></a></div>
+<div class="logo"><a href="/AnimeMovil/" title="Pagina principal"><img src="/AnimeMovil/assets/webApp/logo.png"/></a></div>
 
 
 
@@ -193,7 +204,7 @@ function validateSession(){
 <?php
 
 //imprimir mensaje del admin
-$json = file_get_contents("/var/www/html/static/mensaje.json");
+$json = file_get_contents("C:\\xampp\\htdocs\\AnimeMovil\\static\\mensaje.json");
 
 if($json){
   $json = json_decode($json);
@@ -238,13 +249,13 @@ while( $stmt->fetch() ){
 
 //img
 if( $imgCustom == 1){
-$imgUrl = "/assets/media/episodio-".$id."_grande.jpg";
+$imgUrl = "/AnimeMovil/assets/media/episodio-".$id."_grande.jpg";
 }else{
-$imgUrl = "/assets/media/anime-".$parentId."_grande.jpg";
+$imgUrl = "/AnimeMovil/assets/media/anime-".$parentId."_grande.jpg";
 }
 
 //imprimir
-echo '<li><a href="/episodio/' . $id .'-' . $slug .'" title="' . $title .'"> <img src="' . $imgUrl .'" alt="#"/> <span>' . $title .'</span> </a> </li>';
+echo '<li><a href="/AnimeMovil/episodio/' . $id .'-' . $slug .'" title="' . $title .'"> <img src="' . $imgUrl .'" alt="#"/> <span>' . $title .'</span> </a> </li>';
 
 }
 
@@ -356,7 +367,7 @@ echo '<li><a href="/episodio/' . $id .'-' . $slug .'" title="' . $title .'"> <im
 </script>
 
 
-<script async src="/assets/webApp/app.js"></script>
-<link href="/assets/webApp/icons/font-awesome.css" rel="stylesheet"/>
+<script async src="/AnimeMovil/assets/webApp/app.js"></script>
+<link href="/AnimeMovil/assets/webApp/icons/font-awesome.css" rel="stylesheet"/>
 </body>
 </html>

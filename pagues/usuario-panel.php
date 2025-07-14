@@ -1,7 +1,7 @@
 <?php
 
 //include_once en raiz
-require_once("/var/www/html/vars_info.php");
+require_once("../vars_info.php");
 
 
 //funciones para admin panel
@@ -17,13 +17,13 @@ $session = validateSession(1);
 <html lang="es">
 <head>
         <title>Panel</title>
-        <link rel="shortcut icon" href="/assets/webApp/favicon.png" type="image/png"/>
+        <link rel="shortcut icon" href="/AnimeMovil/assets/webApp/favicon.png" type="image/png"/>
         <meta content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1" name="viewport"/>
         <meta charset="utf-8"/>
-	<link rel="stylesheet" href="/assets/webApp/panel.css">
-	<link href="/assets/webApp/icons/font-awesome.css" rel="stylesheet"/>
+	<link rel="stylesheet" href="/AnimeMovil/assets/webApp/panel.css">
+	<link href="/AnimeMovil/assets/webApp/icons/font-awesome.css" rel="stylesheet"/>
         <meta name="robots" content="noindex, nofollow"/>
-        <script src="/assets/webApp/panel.js"></script>
+        <script src="/AnimeMovil/assets/webApp/panel.js"></script>
 </head>
 
 <body>
@@ -35,7 +35,7 @@ $session = validateSession(1);
 
 <header class="cabecera">
 
-<div class="logo"><a href="/" title="Pagina principal"><img src="/assets/webApp/logo.png"/></a></div>
+<div class="logo"><a href="/AnimeMovil/" title="Pagina principal"><img src="/AnimeMovil/assets/webApp/logo.png"/></a></div>
 
 <div class="buscador">
   <form method="post" action="/buscar">

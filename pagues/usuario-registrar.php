@@ -12,7 +12,7 @@ $error=false;
 
 //include_once en raiz
 
-require_once("/var/www/html/vars_info.php");
+require_once("../vars_info.php");
 
 //include en raiz
 
@@ -82,9 +82,9 @@ header("Location: /entrar");exit();
 <html lang="es">
 <head>
 	<title>Registrar</title>
-	<link rel="stylesheet" type="text/css" href="/assets/webApp/panel.css">
-        <link rel="icon" href="/assets/webApp/favicon.png" type="image/png"/>
-        <link rel="shortcut icon" href="/assets/webApp/favicon.png" type="image/png"/>
+	<link rel="stylesheet" type="text/css" href="/AnimeMovil/assets/webApp/panel.css">
+        <link rel="icon" href="/AnimeMovil/assets/webApp/favicon.png" type="image/png"/>
+        <link rel="shortcut icon" href="/AnimeMovil/assets/webApp/favicon.png" type="image/png"/>
         <meta content='width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1' name='viewport'/>
         <meta charset="utf-8"/>
 </head>
@@ -93,7 +93,7 @@ header("Location: /entrar");exit();
 
 <!-- Formulario para iniciar sesion -->
 <div class="usuarioForm">
- <div class="logoLogin"><a href="/" title="Pagina principal"><img src="/assets/webApp/logo.png"/></a></div>
+ <div class="logoLogin"><a href="/AnimeMovil/" title="Pagina principal"><img src="/AnimeMovil/assets/webApp/logo.png"/></a></div>
    <form method="post">
    <input type="text" name="usuario" placeholder="Usuario" required/>
    <input type="text" name="correo" placeholder="Correo" required/>

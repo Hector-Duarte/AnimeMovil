@@ -264,7 +264,7 @@ apiResponse=JSON.parse(xmlhttp.responseText);
 searchNum = 0;
                  while( searchNum < apiResponse.result.count ){
 
-                       document.getElementsByClassName("buscadorResultados")[0].getElementsByTagName("ul")[0].innerHTML+=' <li><a href="/anime/' + apiResponse.result.items[searchNum].id + '-' + apiResponse.result.items[searchNum].slug + '"><img src="/assets/media/anime-' + apiResponse.result.items[searchNum].id + '_pequena.jpg"></img> ' + apiResponse.result.items[searchNum].title + ' </a></li> ';
+                       document.getElementsByClassName("buscadorResultados")[0].getElementsByTagName("ul")[0].innerHTML+=' <li><a href="/AnimeMovil/pagues/animeIndex.php?id=' + apiResponse.result.items[searchNum].id + '"><img src="/AnimeMovil/assets/media/anime-' + apiResponse.result.items[searchNum].id + '_pequena.jpg"></img> ' + apiResponse.result.items[searchNum].title + ' </a></li> ';
 
 
                        searchNum+=1;
@@ -280,7 +280,7 @@ searchNum = 0;
 //vars gets
 sendVars = "q=" + inputSearch.value + "&limit=4";
 
-xmlhttp.open("GET","/api/buscador?" + sendVars, true);
+xmlhttp.open("GET","/AnimeMovil/api/api.php?node=buscador&" + sendVars, true);
 
 
 if(inputSearch.value != ""){

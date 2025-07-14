@@ -1,0 +1,24 @@
+/* CSS para mejorar las imágenes faltantes */
+img[alt="#"], img[src*="#"] {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
+    font-size: 12px;
+    text-align: center;
+    min-height: 90px;
+    min-width: 90px;
+}
+
+img[alt="#"]:before, img[src*="#"]:before {
+    content: "🎬 ANIME";
+    display: block;
+}
+
+/* Mejorar el header */
+.logo img {
+    max-height: 40px;
+    width: auto;
+}

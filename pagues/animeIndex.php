@@ -1,6 +1,6 @@
 <?php
 
-require_once("/var/www/html/vars_info.php");
+require_once("C:\\xampp\\htdocs\\AnimeMovil\\vars_info.php");
 
 $cachePath = CACHE_PATH . "anime-" .$_GET['id']. "-info.json";
 
@@ -43,6 +43,7 @@ header("x-cache: MISS");
 
 
 $cache=new stdClass();
+$cache->anime = new stdClass(); // Inicializar el objeto anime
 
 //conectar a base de datos
 $mysqli = new mysqli(HOST, USER, PASSWORD, DATABASE);
@@ -130,6 +131,7 @@ $cache->generos=$generos;
 
     while( $stmt->fetch() ){
 
+$episodios[$epiTotales] = new stdClass(); // Inicializar objeto
 $episodios[$epiTotales]->id=$epiId;
 $episodios[$epiTotales]->title=$epiTitle;
 $episodios[$epiTotales]->slug=$epiSlug;
@@ -171,6 +173,7 @@ $cache->childrens=$episodios;
 
     while( $stmt->fetch() ){
 
+$animesRelacionados[$animesRelacionadosTotales] = new stdClass(); // Inicializar objeto
 $animesRelacionados[$animesRelacionadosTotales]->id=$relaId;
 $animesRelacionados[$animesRelacionadosTotales]->title=$relaTitle;
 $animesRelacionados[$animesRelacionadosTotales]->slug=$relaSlug;
@@ -265,12 +268,13 @@ function validateSession(){
         <meta content='Anime Móvil' name='Author'/>
         <meta property="og:title" content="<?php echo $title; ?>"/>
         <meta property="og:type" content="video.episode"/>
-        <meta content='/assets/media/anime-<?php echo $id; ?>_grande.jpg' property='og:image'/>
+        <meta content='/AnimeMovil/assets/media/anime-<?php echo $id; ?>_grande.jpg' property='og:image'/>
         <meta content='general' name='rating'/>
         <meta name="robots" content="noindex, nofollow"/>
-        <link rel="stylesheet" type="text/css" href="/assets/webApp/app.css"/>
-        <link rel="shortcut icon" href="/assets/webApp/favicon.png" type="image/png"/>
-        <link href='/assets/media/anime-<?php echo $id; ?>_grande.jpg' rel='image_src'/>
+        <link rel="stylesheet" type="text/css" href="/AnimeMovil/assets/webApp/app.css"/>
+        <link rel="stylesheet" type="text/css" href="/AnimeMovil/assets/webApp/mejoras.css"/>
+        <link rel="shortcut icon" href="/AnimeMovil/assets/webApp/favicon.png" type="image/png"/>
+        <link href='/AnimeMovil/assets/media/anime-<?php echo $id; ?>_grande.jpg' rel='image_src'/>
 
 
 
@@ -325,7 +329,7 @@ function validateSession(){
  <nav class="contentHeader">  
    <div class="cabecera">
 
-<div class="logo"><a href="/" title="Pagina principal"><img src="/assets/webApp/logo.png"/></a></div>
+<div class="logo"><a href="/AnimeMovil/" title="Pagina principal"><img src="/AnimeMovil/assets/webApp/logo.png"/></a></div>
 
 
 
@@ -429,7 +433,7 @@ function validateSession(){
 
 
 <div class="animePortada">
-<img src="/assets/media/anime-<?php echo $id; ?>_portada.jpg"/>
+<img src="/AnimeMovil/assets/media/anime-<?php echo $id; ?>_portada.jpg"/>
 
 <div class="x-emisionEstado x-<?php if($simulcasts=="0"){ echo "false"; }else{ echo "true"; } ?>">
 <?php if($simulcasts=="0"){ echo "Finalizado"; }else{ echo "En emisión"; } ?>
@@ -679,13 +683,13 @@ while($episodios[$num]){
 
 //imagenes personalizadas
 if( $episodios[$num]->imgCustom ){
-$episodios[$num]->imgCustom = '/assets/media/episodio-' . $episodios[$num]->id . '_pequena.jpg';
+$episodios[$num]->imgCustom = '/AnimeMovil/assets/media/episodio-' . $episodios[$num]->id . '_pequena.jpg';
 }else{
-$episodios[$num]->imgCustom = '/assets/media/anime-' . $id . '_grande-pequena.jpg';
+$episodios[$num]->imgCustom = '/AnimeMovil/assets/media/anime-' . $id . '_grande-pequena.jpg';
 }
 
 //imprimir
-echo '<li><a href="/episodio/' . $episodios[$num]->id .'-' . $episodios[$num]->slug .'" title="' . $episodios[$num]->title .'"> <img src="' . $episodios[$num]->imgCustom .'" alt="' . $episodios[$num]->title .'"/> <span>Episodio #' . $episodios[$num]->num .' -   ' . $episodios[$num]->title .'</span> </a> </li>';
+echo '<li><a href="/AnimeMovil/episodio/' . $episodios[$num]->id .'-' . $episodios[$num]->slug .'" title="' . $episodios[$num]->title .'"> <img src="' . $episodios[$num]->imgCustom .'" alt="' . $episodios[$num]->title .'"/> <span>Episodio #' . $episodios[$num]->num .' -   ' . $episodios[$num]->title .'</span> </a> </li>';
 
 
 $num=$num+1;
@@ -723,7 +727,7 @@ if($collection == 0 ){
 $num=0;
 while($num < count($animesRelacionados) ){
 
-echo '<li><a href="/anime/' . $animesRelacionados[$num]->id . '-' . $animesRelacionados[$num]->slug . '" title="' . $animesRelacionados[$num]->title . '"> <img src="/assets/media/anime-' . $animesRelacionados[$num]->id . '_pequena.jpg"/> <span>' . $animesRelacionados[$num]->title . '</span> </a></li>';
+echo '<li><a href="/anime/' . $animesRelacionados[$num]->id . '-' . $animesRelacionados[$num]->slug . '" title="' . $animesRelacionados[$num]->title . '"> <img src="/AnimeMovil/assets/media/anime-' . $animesRelacionados[$num]->id . '_pequena.jpg"/> <span>' . $animesRelacionados[$num]->title . '</span> </a></li>';
 $num=$num+1;
 }
 
@@ -816,9 +820,9 @@ $num=$num+1;
 
 
 
-<script async src="/assets/webApp/app.js"></script>
+<script async src="/AnimeMovil/assets/webApp/app.js"></script>
 
 
-<link href="/assets/webApp/icons/font-awesome.css" rel="stylesheet"/>
+<link href="/AnimeMovil/assets/webApp/icons/font-awesome.css" rel="stylesheet"/>
 </body>
 </html>

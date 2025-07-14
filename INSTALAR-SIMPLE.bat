@@ -1,0 +1,3 @@
+@echo off
+echo Copiando proyecto a XAMPP...
+xcopy /E /I /Y "." "C:\xampp\htdocs\AnimeMovil\" > nul && copy /Y "config-XAMPP-LISTO.php" "C:\xampp\htdocs\AnimeMovil\config\config.php" > nul && copy /Y "vars_info-XAMPP-LISTO.php" "C:\xampp\htdocs\AnimeMovil\vars_info.php" > nul && echo ✓ LISTO! Ahora ve a http://localhost/AnimeMovil/ && echo (Recuerda configurar la base de datos en phpMyAdmin) && pause
