@@ -72,5 +72,5 @@ Si tienes errores:
 
 ---
 
-**Desarrollado por**: Hector Duarte  
+
 **Año**: 2017-2025
